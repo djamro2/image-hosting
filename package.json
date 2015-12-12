@@ -17,6 +17,7 @@
     "gulp-nodemon": "^2.0.4",
     "gulp-plumber": "^1.0.1",
     "gulp-watch": "^4.3.5",
-    "mongoose": "^4.3.0"
+    "mongoose": "^4.3.0",
+    "multer": "^1.1.0"
   }
 }

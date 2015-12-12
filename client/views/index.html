@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ImageHosting">
 <head>
     <meta charset="UTF-8">
-    <title>Image Hosting Test</title>
+
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.css">
+
+    <script type="text/javascript" src="/scripts/angular.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-animate.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/ng-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="/scripts/ng-file-upload.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
+
+    <script type="text/javascript" src="/app/app.js"></script>
+    <script type="text/javascript" src="/app/controllers/HomeCtrl.js"></script>
+
+    <title>Image Hosting</title>
 </head>
-<body>
-    <p>This is the image hosting website </p>
+
+<body ng-controller="HomeController">
+
+    <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
+
+        <form name="uploadForm">
+
+        <fieldset>
+
+        <md-toolbar class="md-primary md-whiteframe-1dp">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex upload-heading">Upload Image</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout="column" layout-align="center center" flex="100" layout-padding class="md-whiteframe-8dp">
+            <md-input-container>
+                <label>Title (optional)</label>
+                <input name="title" ng-model="image.title">
+            </md-input-container>
+            <input type="file" name="file" ngf-select ng-model="image.file" size="31" required>
+            <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
+        </md-content>
+
+        </fieldset>
+
+        </form>
+
+    </div>
+
 </body>
+
 </html>
