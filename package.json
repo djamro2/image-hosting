@@ -19,6 +19,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-watch": "^4.3.5",
     "mongoose": "^4.3.0",
-    "multer": "^1.1.0"
+    "multer": "^1.1.0",
+    "randomstring": "^1.1.3"
   }
 }

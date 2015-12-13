@@ -1,5 +1,7 @@
 var app = angular.module('ImageHosting',
-        ['ImageHosting.controllers',
+        ['ImageHosting.factories',
+         'ImageHosting.controllers',
+         'ImageHosting.directives',
          'ngRoute',
          'ngResource',
          'ngMaterial',

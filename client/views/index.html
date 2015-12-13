@@ -18,8 +18,10 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 
-    <script type="text/javascript" src="/app/app.js"></script>
+    <script type="text/javascript" src="/app/services/ImageService.js"></script>
     <script type="text/javascript" src="/app/controllers/HomeCtrl.js"></script>
+    <script type="text/javascript" src="/app/directives/buttonAsInput.js"></script>
+    <script type="text/javascript" src="/app/app.js"></script>
 
     <title>Image Hosting</title>
 </head>
@@ -38,18 +40,59 @@
             </div>
         </md-toolbar>
 
-        <md-content layout="column" layout-align="center center" flex="100" layout-padding class="md-whiteframe-8dp">
-            <md-input-container>
-                <label>Title (optional)</label>
-                <input name="title" ng-model="image.title">
-            </md-input-container>
-            <input type="file" name="file" ngf-select ng-model="image.file" size="31" required>
-            <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
+        <md-content layout-align="center center"  layout-padding class="md-whiteframe-8dp">
+            <div layout="column" class="component-wrapper">
+
+                <p class="uploadedBy">Uploading as <span>anonymous</span></p>
+
+                <md-input-container>
+                    <label>Title (optional)</label>
+                    <input name="title" ng-model="image.title">
+                </md-input-container>
+
+                <div class="input-file-row" layout="row" layout-align="start center" button-as-input>
+                    <input type="file" id="hiddenFileInput" name="file" ngf-select ng-model="image.file" ng-change="updateFileName()" size="31" required>
+                    <md-button  id="chooseFileButton" class="md-raised choose-file-button">Choose File</md-button>
+                    <span class="file-name">{{fileName}}</span>
+                </div>
+
+                <md-checkbox class="md-primary checkbox-nsfw" name="nsfw" ng-model="image.nsfw" aria-label="Checkbox is nfsw?">
+                    NSFW?
+                </md-checkbox>
+
+                <md-checkbox class="md-primary" name="isPolicyAgreed" ng-model="image.agree" aria-label="Checkbox doesn't violate policy">
+                    Agree that this doesn't violate our <a href="#">policy</a>
+                </md-checkbox>
+
+                <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
+
+                <p ng-if="errorMessage" class="error-message">Sorry, there was a problem with uploading the image</p>
+            </div>
         </md-content>
 
         </fieldset>
 
         </form>
+
+    </div>
+
+    <div layout="column" layout-align="center center" class="recent-pic-wrapper" ng-cloak>
+
+        <md-toolbar class="md-primary md-whiteframe-1dp">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex upload-heading">Recent Images</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout="row" layout-align="space-around center" layout-padding class="md-whiteframe-8dp">
+
+            <div class="image" flex ng-repeat="image in images">
+                <a ng-href="/image/{{image.id}}">
+                    <img ng-src="/api/image/{{image.id}}" alt="{{image.title}}">
+                </a>
+            </div>
+
+        </md-content>
 
     </div>
 

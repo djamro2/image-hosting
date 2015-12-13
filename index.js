@@ -1,65 +1,51 @@
 
 var express    = require('express');
-var mongoose   = require('mongoose');
 var bodyParser = require('body-parser');
-var multiparty = require('multiparty');
-var Grid       = require('gridfs-stream');
-var fs         = require('fs');
 
 var app = express();
 
-var Schema = mongoose.Schema;
-var conn   = mongoose.connection;
-mongoose.connect('mongodb://127.0.0.1/imageHosting');
-Grid.mongo = mongoose.mongo;
-
 app.use(express.static('client'));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/client/views/index.html');
-});
+// routing - needs to be after middleware
+require('./server/routes')(app);
 
-app.post('/uploadImage', function(req, res, next){
-
-    var form = new multiparty.Form();
-
-    form.parse(req, function(err, fields, files){
-
-        var gfs = Grid(conn.db);
-
-        var file = files.file[0];
-        var contentType = file.headers['content-type'];
-        var tmpPath = file.path;
-        var extIndex = tmpPath.lastIndexOf('.');
-        var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
-
-        // uuid is for generating unique filenames.
-        var fileName = 'someImageFile' + extension;
-        var destPath = 'C:\\Users\\Daniel\\Desktop\\workspace\\image-hosting\\uploads\\' + fileName;
-
-        // Server side file type checker.
-        if (contentType !== 'image/png' && contentType !== 'image/jpeg') {
-            fs.unlink(tmpPath);
-            return res.status(400).send('Unsupported file type.');
-        }
-
-        // streaming to gridfs
-        var writestream = gfs.createWriteStream({
-            filename: fileName
-        });
-        fs.createReadStream(tmpPath).pipe(writestream);
-
-        writestream.on('close', function (file) {
-            // do something with `file`
-            console.log(file.filename + ' Written To DB');
-            res.send('Sample return');
-        });
-    });
-
-});
-
-var server = app.listen(8000, function () {
+var server = app.listen(3000, function () {
   var host = 'localhost';
   var port = server.address().port;
   console.log('Image hosting app listening at http://%s:%s', host, port);
 });
+
+var sockets = [];
+server.on('connection', function(socket){
+    sockets.push(socket);
+})
+
+var shutDownApp = function() {
+
+    sockets.forEach(function(socket) {
+        socket.destroy();
+    });
+
+    server.close(function(){
+        console.log("Express connection closed");
+        process.exit();
+    });
+
+    setTimeout( function () {
+        console.error("Could not close connections in time, forcefully shutting down");
+        process.exit(1);
+    }, 20*1000);
+};
+
+process.stdin.resume(); //so program doesn't close instantly
+process.on('SIGINT', shutDownApp);
+process.on('exit', shutDownApp);
+//process.on('uncaughtException', shutDownApp);
+
+// todo
+//
+// add extra fields to image data -> size(in MB), width, height
+// incrememnt native views in api/image/:id route
+// casually work through current code, error proof and improve
+// add some styling improvement to current home page, add title to image
+// start working on image page
