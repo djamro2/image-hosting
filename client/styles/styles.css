@@ -1,0 +1,84 @@
+fieldset {
+  border: none;
+}
+.component-wrapper {
+  width: 50%;
+  margin-left: 25%;
+}
+.component-wrapper md-checkbox {
+  margin-left: 0!important;
+}
+.component-wrapper .checkbox-nsfw {
+  margin-top: 1.5rem;
+}
+.component-wrapper .choose-file-button {
+  width: 88px;
+  line-height: 18px;
+  min-height: 30px!important;
+  margin-left: 0;
+  font-size: .7rem;
+}
+.component-wrapper .error-message {
+  margin: auto;
+  color: red;
+  padding-bottom: .5rem;
+}
+.component-wrapper .input-file-row button {
+  margin-right: 1rem;
+}
+.component-wrapper .input-file-row .file-name {
+  margin-top: 2px;
+  font-size: .8rem;
+}
+.component-wrapper #hiddenFileInput {
+  display: none;
+}
+.component-wrapper #uploadButton {
+  width: 88px;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.component-wrapper .uploadedBy {
+  font-size: .8rem;
+}
+.component-wrapper .uploadedBy span {
+  font-style: italic;
+}
+.recent-pic-wrapper {
+  margin-top: 50px;
+}
+.recent-pic-wrapper md-toolbar {
+  max-width: 960px;
+}
+.recent-pic-wrapper md-toolbar h2 {
+  margin: auto;
+}
+.recent-pic-wrapper md-content {
+  width: 960px;
+  padding: 0;
+  text-align: center;
+  height: 300px;
+}
+.recent-pic-wrapper .image {
+  height: 150px;
+  width: 120px;
+}
+.recent-pic-wrapper .image img {
+  max-width: 200px;
+  max-height: 250px;
+}
+.upload-wrapper {
+  margin-top: 100px;
+  max-width: 960px;
+}
+.upload-wrapper md-toolbar {
+  max-width: 960px;
+}
+.upload-wrapper md-content {
+  width: 960px;
+  padding: 0;
+}
+.upload-wrapper .upload-heading {
+  margin: auto;
+}
