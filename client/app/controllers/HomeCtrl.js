@@ -8,6 +8,8 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 
 	var vm = this;
 
+	var _URL = window.URL || window.webkitURL;
+
 	$scope.image = {};
 	$scope.errorMessage = "";
 
@@ -19,18 +21,40 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 		});
 	};
 
-	$scope.updateFileName = function() {
-		$scope.fileName = $scope.image.file.name;
+	$scope.updateImageInfo = function(file){
+
+		$scope.fileName = file.name;
+
+		if ($scope.errorMessage.indexOf('select an image') > -1){
+			$scope.errorMessage = '';
+		}
+
+		Upload.imageDimensions(file).then(function(d){
+			$scope.image.width = d.width;
+			$scope.image.height = d.height;
+		});
 	};
 
 	$scope.uploadImage = function(file){
+
+		if (!file) {
+			$scope.errorMessage = "Please select an image to upload";
+			return;
+		}
+
+		if (!$scope.image.agree) {
+			$scope.errorMessage = "Please confirm that the image does not violate the policy";
+			return;
+		}
 
 		file.upload = Upload.upload({
 			url: '/uploadImage',
 			data: {file: file,
 				   title: $scope.image.title,
 			       nsfw: $scope.image.nsfw,
-			       isPolicyAgreed: $scope.image.agree}
+			       isPolicyAgreed: $scope.image.agree,
+			   	   width: $scope.image.width,
+			   	   height: $scope.image.height}
 		});
 
 		file.upload.then(function(response){
@@ -45,6 +69,12 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
       		file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 		});
 	};
+
+	$scope.$watch('image.agree', function(newVal, oldVal){
+		if (newVal && $scope.errorMessage.indexOf('policy') > -1){
+			$scope.errorMessage = '';
+		}
+	});
 
 	vm.init();
 

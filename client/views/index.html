@@ -51,7 +51,7 @@
                 </md-input-container>
 
                 <div class="input-file-row" layout="row" layout-align="start center" button-as-input>
-                    <input type="file" id="hiddenFileInput" name="file" ngf-select ng-model="image.file" ng-change="updateFileName()" size="31" required>
+                    <input type="file" id="hiddenFileInput" name="file" ngf-select ng-model="image.file" ng-change="updateImageInfo(image.file)" size="31" required>
                     <md-button  id="chooseFileButton" class="md-raised choose-file-button">Choose File</md-button>
                     <span class="file-name">{{fileName}}</span>
                 </div>
@@ -66,7 +66,7 @@
 
                 <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
 
-                <p ng-if="errorMessage" class="error-message">Sorry, there was a problem with uploading the image</p>
+                <p ng-if="errorMessage" class="error-message">{{errorMessage}}</p>
             </div>
         </md-content>
 

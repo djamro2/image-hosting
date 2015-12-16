@@ -40,12 +40,10 @@ var shutDownApp = function() {
 process.stdin.resume(); //so program doesn't close instantly
 process.on('SIGINT', shutDownApp);
 process.on('exit', shutDownApp);
-//process.on('uncaughtException', shutDownApp);
 
 // todo
 //
-// add extra fields to image data -> size(in MB), width, height
-// incrememnt native views in api/image/:id route
-// casually work through current code, error proof and improve
+// make sure user says that they agree to policy (front end thing)
 // add some styling improvement to current home page, add title to image
+// casually work through current code, error proof and improve
 // start working on image page
