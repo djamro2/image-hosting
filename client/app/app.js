@@ -1,3 +1,4 @@
+
 var app = angular.module('ImageHosting',
         ['ImageHosting.factories',
          'ImageHosting.controllers',
@@ -6,3 +7,10 @@ var app = angular.module('ImageHosting',
          'ngResource',
          'ngMaterial',
          'ngFileUpload']);
+
+//configuration
+app.config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue')
+        .accentPalette('orange');
+});

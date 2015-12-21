@@ -43,7 +43,15 @@ process.on('exit', shutDownApp);
 
 // todo
 //
-// make sure user says that they agree to policy (front end thing)
-// add some styling improvement to current home page, add title to image
-// casually work through current code, error proof and improve
+// home page is mostly done, prevent user from uploading the same thing multiple times
+    // probably just add a lock on the back end after x uploads under x minutes
 // start working on image page
+    // simply sendFile or render page (angular or express-handlebars)
+
+// future ideas
+//
+// home page looks very clean but could use more content and screen size proofing
+// still need to finalize monetization plan (find numbers on this)
+// add more content, comments, accounts, account pages, more images, fix bugs during this
+    // work slowly to monetize what I have, then continue building
+// consider aws?

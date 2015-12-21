@@ -12,16 +12,29 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 
 	$scope.image = {};
 	$scope.errorMessage = "";
+	$scope.successMessage = "";
 
 	$scope.fileName = "no file chosen";
 
 	vm.init = function(){
 		ImageService.getRecentImages(function(response){
 			$scope.images = response;
+			console.log(response);
 		});
 	};
 
+	vm.successMessage = function(imageName) {
+		$scope.successMessage = "Image Uploaded!";
+		$timeout(function(){
+			if($scope.successMessage)
+				$scope.successMessage = "";
+		}, 5000);
+	};
+
 	$scope.updateImageInfo = function(file){
+
+		if (!file)
+			return;
 
 		$scope.fileName = file.name;
 
@@ -61,6 +74,9 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 			$timeout(function(){
 				file.result = response.data;
 			});
+			if (response.statusText === "OK"){
+				vm.successMessage();
+			}
 		}, function(response) {
 			if (response.status > 0)
 				$scope.errorMsg = response.status + ": " + response.data;

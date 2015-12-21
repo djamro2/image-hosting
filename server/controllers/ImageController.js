@@ -102,7 +102,7 @@ module.exports.getImage = function(req, res){
     });
 };
 
-// for now return the last 4 images, maybe use param field in the future
+// for now return the last 4 image data, maybe use param field in the future
 module.exports.getRecentImages = function(req, res){
 
     Image.find({})

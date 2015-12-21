@@ -30,18 +30,25 @@
 
     <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
 
-        <form name="uploadForm">
+        <md-toolbar class="md-whiteframe-1dp toolbar-header">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex upload-heading">Image Hosting</h2>
+            </div>
+        </md-toolbar>
 
-        <fieldset>
-
-        <md-toolbar class="md-primary md-whiteframe-1dp">
+        <md-toolbar class="md-accent md-whiteframe-1dp upload-heading">
             <div class="md-toolbar-tools">
                 <h2 class="md-flex upload-heading">Upload Image</h2>
             </div>
         </md-toolbar>
 
-        <md-content layout-align="center center"  layout-padding class="md-whiteframe-8dp">
+        <md-content layout-align="center center" layout-padding class="md-whiteframe-8dp component-content">
+
             <div layout="column" class="component-wrapper">
+
+                <form name="uploadForm">
+
+                <fieldset>
 
                 <p class="uploadedBy">Uploading as <span>anonymous</span></p>
 
@@ -60,36 +67,46 @@
                     NSFW?
                 </md-checkbox>
 
-                <md-checkbox class="md-primary" name="isPolicyAgreed" ng-model="image.agree" aria-label="Checkbox doesn't violate policy">
+                <md-checkbox class="md-primary checkbox-agree" name="isPolicyAgreed" ng-model="image.agree" aria-label="Checkbox doesn't violate policy">
                     Agree that this doesn't violate our <a href="#">policy</a>
                 </md-checkbox>
 
-                <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
+                <div layout="row" layout-align="center center">
+                    <md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadImage(image.file)">Upload</md-button>
+                </div>
 
-                <p ng-if="errorMessage" class="error-message">{{errorMessage}}</p>
+                <div layout="row" layout-align="center center">
+                    <p ng-if="errorMessage && !successMessage" class="bottom-message red">{{errorMessage}}</p>
+                    <p ng-if="successMessage && !errorMessage" class="bottom-message blue">{{successMessage}}</p>
+                </div>
+
+                </fieldset>
+
+                </form>
+
             </div>
         </md-content>
-
-        </fieldset>
-
-        </form>
 
     </div>
 
     <div layout="column" layout-align="center center" class="recent-pic-wrapper" ng-cloak>
 
-        <md-toolbar class="md-primary md-whiteframe-1dp">
+        <md-toolbar class="md-accent md-whiteframe-1dp">
             <div class="md-toolbar-tools">
                 <h2 class="md-flex upload-heading">Recent Images</h2>
             </div>
         </md-toolbar>
 
-        <md-content layout="row" layout-align="space-around center" layout-padding class="md-whiteframe-8dp">
+        <md-content layout="row" layout-md="column" layout-align="space-around start" layout-padding class="md-whiteframe-8dp">
 
-            <div class="image" flex ng-repeat="image in images">
+            <div class="image" ng-repeat="image in images">
                 <a ng-href="/image/{{image.id}}">
                     <img ng-src="/api/image/{{image.id}}" alt="{{image.title}}">
                 </a>
+                <div class="image-info">
+                    <span class="title">{{image.title}}</span>
+                    <span class="views">{{image.viewsEmbeded + image.viewsWebsite}} views</span>
+                </div>
             </div>
 
         </md-content>

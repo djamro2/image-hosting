@@ -7,20 +7,45 @@ fieldset {
     border: none;
 }
 
-.component-wrapper {
-    width: 50%;
-    margin-left: 25%;
+.blue {
+    color: blue;
+}
 
-    input {
-        //margin-top: .25rem;
-    }
+.red {
+    color: red;
+}
+
+.component-content {
+
+}
+
+.component-wrapper {
+
+    width: 50%;
+    margin: auto;
 
     md-checkbox {
         margin-left: 0!important;
     }
 
+    md-input-container {
+        width: 80%;
+    }
+
+    .bottom-message {
+        margin: auto;
+        margin-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
     .checkbox-nsfw {
         margin-top: 1.5rem;
+        width: 100%;
+    }
+
+    .checkbox-agree {
+        width: 100%;
+        margin-bottom: 0;
     }
 
     .choose-file-button {
@@ -29,12 +54,6 @@ fieldset {
         min-height: 30px!important;
         margin-left: 0;
         font-size: .7rem;
-    }
-
-    .error-message {
-        margin: auto;
-        color: red;
-        padding-bottom: .5rem;
     }
 
     .input-file-row {
@@ -49,22 +68,26 @@ fieldset {
         }
     }
 
-    #hiddenFileInput {
-        display: none;
-    }
-
-    #uploadButton {
-        width: 88px;
-        margin: auto;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-
     .uploadedBy {
+
         font-size: .8rem;
+
         span {
             font-style: italic;
         }
+    }
+
+    #hiddenFileInput {
+
+        display: none;
+
+    }
+
+    #uploadButton {
+
+        width: 88px;
+        margin: 1rem auto;
+        margin-top: 2rem;
     }
 }
 
@@ -73,42 +96,89 @@ fieldset {
     margin-top: 50px;
 
     md-toolbar {
+
         max-width: 960px;
+
         h2 {
             margin: auto;
         }
     }
 
     md-content {
+
         width: 960px;
         padding: 0;
         text-align: center;
-        height: 300px;
+        margin-bottom: 2rem;
     }
 
     .image {
-        height: 150px;
-        width: 120px;
+
+        max-height: 400px;
+        width: 200px;
+        margin-top: 2rem;
+
         img {
-            max-width: 200px;
-            max-height: 250px;
+            width: 100%;
+        }
+
+        .image-info {
+
+            text-align: right;
+
+            .title {
+                float: left;
+                margin-left: .2rem;
+            }
+
+            .views {
+                margin-right: .2rem;
+                font-size: .7rem;
+            }
         }
     }
 }
 
 .upload-wrapper {
-    //text-align: center;
-    //width: 100%;
-    margin-top: 100px;
+
+    margin-top: 4rem;
     max-width: 960px;
+
     md-toolbar {
         max-width: 960px;
     }
+
     md-content {
         width: 960px;
         padding: 0;
     }
+
+    .toolbar-header {
+
+        h2 {
+            margin: auto;
+            font-size: 1.7rem;
+        }
+    }
+
     .upload-heading {
-        margin: auto;
+        margin-top: 2rem;
+
+        h2 {
+            margin: auto;
+        }
+    }
+}
+
+//to do later, optimize for phones and tablets
+@media (max-width: 800px) {
+    .component-wrapper {
+        width: 75%;
+    }
+}
+
+@media (max-width: 540px) {
+    .component-wrapper {
+        width: 100%;
     }
 }
