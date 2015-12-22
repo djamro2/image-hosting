@@ -7,6 +7,21 @@ fieldset {
 .red {
   color: red;
 }
+.image-page {
+  text-align: center;
+}
+.image-page .title {
+  margin-top: 2rem;
+  font-size: 2rem;
+}
+.image-page .image-container {
+  max-width: 960px;
+  margin: auto;
+  margin-top: 2rem;
+}
+.image-page .image-container img {
+  max-width: inherit;
+}
 .component-wrapper {
   width: 50%;
   margin: auto;

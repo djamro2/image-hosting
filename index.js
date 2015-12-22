@@ -1,10 +1,16 @@
 
 var express    = require('express');
+var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 
 var app = express();
 
+// middleware
 app.use(express.static('client'));
+
+// handlebars engine
+app.engine('handlebars', handlebars({defaultLayout: 'main'}) );
+app.set('view engine', 'handlebars');
 
 // routing - needs to be after middleware
 require('./server/routes')(app);
@@ -43,6 +49,8 @@ process.on('exit', shutDownApp);
 
 // todo
 //
+// need to add flag to not increment embeded views during loading in website
+// add one to views counter as they are loaded (to reflect real current amount)
 // home page is mostly done, prevent user from uploading the same thing multiple times
     // probably just add a lock on the back end after x uploads under x minutes
 // start working on image page

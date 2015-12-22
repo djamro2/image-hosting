@@ -111,10 +111,53 @@ module.exports.getRecentImages = function(req, res){
          .exec(function(err, result){
              res.send(result);
     });
-
 };
 
 // depending on header, return plain image or html page
 module.exports.getImagePage = function(req, res) {
-    res.send('This is the image page');
+
+    var id = req.params.id;
+
+    console.log(req.get('Accept'));
+
+    // from the webpage
+    if (req.get('Accept').indexOf('text/html') > -1) {
+
+        Image.findOne({ id: id }, function(error, image){
+            utils.incrementWebsiteViews(id);
+            res.render('imagePage', image);
+        });
+
+    // natively, embeded
+    } else {
+
+        gfs.findOne({ filename: id}, function(err, file){
+            if (err) return res.status(400).send(err);
+            if (!file) return res.status(404).send('');
+
+            var extension = id.split('.')[1];
+
+            res.set('Content-Type', 'image/' + extension);
+
+            var readstream = gfs.createReadStream({
+                filename: id
+            });
+
+            readstream.on("error", function(err) {
+                console.log("Got error while processing stream " + err.message);
+                res.end();
+            });
+
+            utils.incrementEmbededViews(id);
+
+            readstream.pipe(res);
+        });
+    }
+
 };
+
+// notes
+//
+// eventpage.html
+//  // show all tickets
+//
