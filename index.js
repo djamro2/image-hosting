@@ -46,20 +46,3 @@ var shutDownApp = function() {
 process.stdin.resume(); //so program doesn't close instantly
 process.on('SIGINT', shutDownApp);
 process.on('exit', shutDownApp);
-
-// todo
-//
-// need to add flag to not increment embeded views during loading in website
-// add one to views counter as they are loaded (to reflect real current amount)
-// home page is mostly done, prevent user from uploading the same thing multiple times
-    // probably just add a lock on the back end after x uploads under x minutes
-// start working on image page
-    // simply sendFile or render page (angular or express-handlebars)
-
-// future ideas
-//
-// home page looks very clean but could use more content and screen size proofing
-// still need to finalize monetization plan (find numbers on this)
-// add more content, comments, accounts, account pages, more images, fix bugs during this
-    // work slowly to monetize what I have, then continue building
-// consider aws?

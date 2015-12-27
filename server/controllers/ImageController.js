@@ -96,7 +96,11 @@ module.exports.getImage = function(req, res){
             res.end();
         });
 
-        utils.incrementEmbededViews(id);
+        // increment only if not from my own web page
+        // TODO: update for domain name, and get rid of localhost
+        var refer = req.get('Referer');
+        if (!refer || (refer.indexOf('imagehosting') == -1 && refer.indexOf('localhost') == -1))
+            utils.incrementEmbededViews(id);
 
         readstream.pipe(res);
     });
@@ -117,8 +121,6 @@ module.exports.getRecentImages = function(req, res){
 module.exports.getImagePage = function(req, res) {
 
     var id = req.params.id;
-
-    console.log(req.get('Accept'));
 
     // from the webpage
     if (req.get('Accept').indexOf('text/html') > -1) {

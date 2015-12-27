@@ -19,7 +19,6 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 	vm.init = function(){
 		ImageService.getRecentImages(function(response){
 			$scope.images = response;
-			console.log(response);
 		});
 	};
 
