@@ -4,7 +4,9 @@ var ImageController = require('./controllers/ImageController');
 
 module.exports = function(app){
 
+    //static routes
     app.get('/', HomeController.getHomePage);
+    app.get('/app/views/policy.html', HomeController.getPolicyPage);
 
     // returns the image page (or image)
     app.get('/image/:id', ImageController.getImagePage);

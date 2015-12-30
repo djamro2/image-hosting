@@ -157,9 +157,3 @@ module.exports.getImagePage = function(req, res) {
     }
 
 };
-
-// notes
-//
-// eventpage.html
-//  // show all tickets
-//

@@ -1,6 +1,13 @@
 
-body {
+html, body {
+    height: 100%;
+}
 
+#container-all {
+    position: relative;
+    display: block;
+    overflow: auto;
+    min-height: 100%;
 }
 
 fieldset {
@@ -19,19 +26,61 @@ fieldset {
 
     text-align: center;
 
-    .title {
-        margin-top: 2rem;
-        font-size: 2rem;
+    .homepage-link {
+        text-decoration: none;
+
+        .header {
+            color: black;
+            font-family: saxmono;
+            color: grey;
+        }
     }
 
     .image-container {
 
         max-width: 960px;
         margin: auto;
-        margin-top: 2rem;
+        margin-top: 1rem;
 
         img {
+            margin-top: .5rem;
             max-width: inherit;
+            border: 1px solid black;
+        }
+
+        .title {
+            float: left;
+            margin-top: 1.5rem;
+            margin-bottom: .5rem;
+            font-size: 2rem;
+        }
+
+        .uploaded-on {
+            float: right;
+            margin-top: 3rem;
+            margin-bottom: .5rem;
+            font-size: .8rem;
+
+            .uploaded-date {
+                font-style: italic;
+            }
+        }
+
+        .image-info {
+
+            float: left;
+            text-align: left;
+            margin-top: .75rem;
+            padding-bottom: 5rem;
+
+            p {
+                font-size: .8rem;
+                margin: .4rem 0;
+            }
+
+            .username {
+                font-style: italic;
+            }
         }
 
     }
@@ -182,9 +231,25 @@ fieldset {
     .upload-heading {
         margin-top: 2rem;
 
+        a {
+            font-family: saxmono;
+        }
+
         h2 {
             margin: auto;
         }
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: .8rem;
+    //font-family: saxmono;
+    a {
+        text-decoration: none;
     }
 }
 
@@ -199,4 +264,9 @@ fieldset {
     .component-wrapper {
         width: 100%;
     }
+}
+
+@font-face {
+    font-family: saxmono;
+    src: url(/styles/saxmono.ttf);
 }

@@ -1,9 +1,9 @@
 /* global angular */
 'use strict';
 
-var controllers = controllers || angular.module('ImageHosting.controllers', []);
+angular.module('ImageHosting.controllers', [])
 
-controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'ImageService',
+.controller('HomeController', ['$scope', '$timeout', 'Upload', 'ImageService',
 	function($scope, $timeout, Upload, ImageService){
 
 	var vm = this;
@@ -12,7 +12,7 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 
 	$scope.image = {};
 	$scope.errorMessage = "";
-	$scope.successMessage = "";
+	$scope.successImageId = "";
 
 	$scope.fileName = "no file chosen";
 
@@ -20,14 +20,6 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 		ImageService.getRecentImages(function(response){
 			$scope.images = response;
 		});
-	};
-
-	vm.successMessage = function(imageName) {
-		$scope.successMessage = "Image Uploaded!";
-		$timeout(function(){
-			if($scope.successMessage)
-				$scope.successMessage = "";
-		}, 5000);
 	};
 
 	$scope.updateImageInfo = function(file){
@@ -74,7 +66,7 @@ controllers.controller('HomeController', ['$scope', '$timeout', 'Upload', 'Image
 				file.result = response.data;
 			});
 			if (response.statusText === "OK"){
-				vm.successMessage();
+				$scope.successImageId = response.data.id;
 			}
 		}, function(response) {
 			if (response.status > 0)

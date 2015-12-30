@@ -35,6 +35,12 @@ gulp.task('default', function() {
 	        .pipe(livereload());
 	});
 
+	//watch handlebars views
+	gulp.watch('views', function(event){
+		gulp.src('views')
+			.pipe(livereload());
+	});
+
 });
 
 gulp.task('less', function() {
