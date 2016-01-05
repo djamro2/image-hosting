@@ -4,6 +4,7 @@ var fs           = require('fs');
 var randomstring = require('randomstring');
 var mongoose     = require('mongoose');
 var Grid         = require('gridfs-stream');
+var moment       = require('moment');
 
 var Image        = require('../models/image');
 var utils        = require('../utils');
@@ -17,6 +18,15 @@ var gfs = Grid(conn.db);
 
 // take a file and save to db, and save schema info as well
 module.exports.uploadImage = function(req, res, next){
+
+    // return if too many images uploaded recently
+    // var cutoff = moment().subtract(5, 'minutes');
+    // Image.find({date: {$gte: cutoff}}, function(error, images){
+    //     if (images.length >= 4) {
+    //         res.status(500).send('Too many images uploaded');
+    //         return;
+    //     }
+    // });
 
     var form = new multiparty.Form();
 
