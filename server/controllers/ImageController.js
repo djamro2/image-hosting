@@ -13,16 +13,15 @@ var local_codes  = require('../../local_codes');
 var Schema = mongoose.Schema;
 var conn = mongoose.connection;
 
+// connect to mongoose
 if (process.env.NODE_ENV === 'production') {
     var connectionString = 'mongodb://' + local_codes.internal_ip + ':' + local_codes.data_port + '/imageHosting';
-    console.log(connectionString);
     mongoose.connect(connectionString);
 } else {
     mongoose.connect('mongodb://127.0.0.1/imageHosting');
 }
 
 Grid.mongo = mongoose.mongo;
-
 var gfs = Grid(conn.db);
 
 // take a file and save to db, and save schema info as well
@@ -118,7 +117,7 @@ module.exports.getImage = function(req, res){
         // increment only if not from my own web page
         // TODO: update for domain name, and get rid of localhost
         var refer = req.get('Referer');
-        if (!refer || (refer.indexOf('imagehosting') == -1 && refer.indexOf('localhost') == -1))
+        if (!refer || (refer.indexOf('newarithmetic') == -1 && refer.indexOf('localhost') == -1))
             utils.incrementEmbededViews(id);
 
         readstream.pipe(res);
