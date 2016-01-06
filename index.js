@@ -18,7 +18,7 @@ require('./server/routes')(app);
 
 var isProduction = process.env.NODE_ENV || false;
 
-if (!isProduction) {
+if (!isProduction) { 
 
     var server = app.listen(3000, function () {
       var host = 'localhost';
@@ -26,9 +26,7 @@ if (!isProduction) {
       console.log('Image hosting app listening at http://%s:%s', host, port);
     });
 
-} else if (isProduction === 'production') {
-
-    console.log('in production');
+} else if (isProduction === 'production') { 
 
     var server = app.listen(local_codes.port, local_codes.internal_ip, function () {
       var host = server.address().address;

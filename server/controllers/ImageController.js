@@ -8,10 +8,19 @@ var moment       = require('moment');
 
 var Image        = require('../models/image');
 var utils        = require('../utils');
+var local_codes  = require('../../local_codes');
 
 var Schema = mongoose.Schema;
 var conn = mongoose.connection;
-mongoose.connect('mongodb://127.0.0.1/imageHosting');
+
+if (process.env.NODE_ENV === 'production') {
+    var connectionString = 'mongodb://' + local_codes.internal_ip + ':' + local_codes.data_port + '/imageHosting';
+    console.log(connectionString);
+    mongoose.connect(connectionString);
+} else {
+    mongoose.connect('mongodb://127.0.0.1/imageHosting');
+}
+
 Grid.mongo = mongoose.mongo;
 
 var gfs = Grid(conn.db);
