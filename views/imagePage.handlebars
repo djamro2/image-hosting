@@ -1,27 +1,29 @@
 
 <div class="image-page" ng-controller="ImagePageController">
 
-    <a class="homepage-link" href="/">
-        <h1 class="header">imgtoast</h1>
-    </a>
+    <div class="simple-navbar">
+        <a class="homepage-link" href="/">
+            <h2 class="header">imgtoast</h2>
+        </a>
+    </div>
 
     <div class="image-container">
-        <div class="image-header">
-            <p class="title">{{title}}</p>
-            <p class="uploaded-on">
-                <span>Uploaded: </span>
-                <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')" class="uploaded-date"></span>
-            </p>
-        </div>
         <div class="image-raw">
+            <div class="image-header">
+                <p class="title">{{title}}</p>
+                <p class="uploaded-on">
+                    <span>Uploaded: </span>
+                    <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')" class="uploaded-date"></span>
+                </p>
+            </div>
             <img src="/api/image/{{id}}"/>
-        </div>
-        <div class="image-info">
-            <p>Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span></p>
-            <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
-            <p>Original dimensions: {{width}}px x {{height}}px</p>
-            <p>Uploaded by: <span class="username">anonymous</span></p>
-            <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
+            <div class="image-info">
+                <p>Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span></p>
+                <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
+                <p>Original dimensions: {{width}}px x {{height}}px</p>
+                <p>Uploaded by: <span class="username">anonymous</span></p>
+                <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
+            </div>
         </div>
     </div>
 

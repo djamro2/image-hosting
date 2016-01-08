@@ -122,9 +122,9 @@
                 <a ng-href="/image/{{image.id}}">
                     <img ng-src="/api/image/{{image.id}}" alt="{{image.title}}">
                 </a>
-                <div class="image-info">
-                    <span class="title">{{image.title}}</span>
-                    <span class="views">{{image.viewsEmbeded + image.viewsWebsite + 1}} views</span>
+                <div class="image-info" layout="row">
+                    <div flex="75" class="title">{{image.title}}</div>
+                    <div flex="25" class="views">{{image.viewsEmbeded + image.viewsWebsite + 1}} views</div>
                 </div>
             </div>
 
