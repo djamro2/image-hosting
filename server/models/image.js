@@ -6,6 +6,7 @@ module.exports = mongoose.model('Image', {
     title: String,
 	isNsfw: Boolean,
 	size: Number,
+	fileType: String,
 	width: {type: Number, default: 0},
 	height: {type: Number, default: 0},
 	viewsEmbeded: {type: Number, default: 0 },

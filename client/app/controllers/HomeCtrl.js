@@ -39,7 +39,7 @@ angular.module('ImageHosting.controllers', [])
 		});
 	};
 
-	$scope.uploadImage = function(file){
+	$scope.uploadFile = function(file){
 
 		if (!file) {
 			$scope.errorMessage = "Please select an image to upload";
@@ -52,7 +52,7 @@ angular.module('ImageHosting.controllers', [])
 		}
 
 		file.upload = Upload.upload({
-			url: '/uploadImage',
+			url: '/uploadFile',
 			data: {file: file,
 				   title: $scope.image.title,
 			       nsfw: $scope.image.nsfw,

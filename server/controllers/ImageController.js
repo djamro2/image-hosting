@@ -10,6 +10,7 @@ var Image        = require('../models/image');
 var utils        = require('../utils');
 var local_codes  = require('../../local_codes');
 
+var main = this;
 var Schema = mongoose.Schema;
 var conn = mongoose.connection;
 
@@ -24,17 +25,8 @@ if (process.env.NODE_ENV === 'production') {
 Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
 
-// take a file and save to db, and save schema info as well
-module.exports.uploadImage = function(req, res, next){
-
-    // return if too many images uploaded recently
-    // var cutoff = moment().subtract(5, 'minutes');
-    // Image.find({date: {$gte: cutoff}}, function(error, images){
-    //     if (images.length >= 4) {
-    //         res.status(500).send('Too many images uploaded');
-    //         return;
-    //     }
-    // });
+// take a file and save to db, and save schema info as well (/uploadFile)
+module.exports.uploadFile = function(req, res, next){
 
     var form = new multiparty.Form();
 
@@ -46,48 +38,21 @@ module.exports.uploadImage = function(req, res, next){
         var extIndex = tmpPath.lastIndexOf('.');
         var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
 
-        // uuid is for generating unique filenames.
-        var fileName = 'someImageFile' + extension;
-
-        // Server side file type checker.
-        if (contentType !== 'image/png' && contentType !== 'image/jpeg') {
-            fs.unlink(tmpPath);
-            return res.status(400).send('Unsupported file type.');
-        }
-
         // todo - make sure this isn't the same as something else
         var id = randomstring.generate(8) + extension;
 
-        // streaming to gridfs
-        var writestream = gfs.createWriteStream({
-            filename: id
-        });
-        fs.createReadStream(tmpPath).pipe(writestream);
+        // tested images that work, add more that work
+        var confirmedImageArray = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif' ];
 
-        writestream.on('close', function (file) {
-
-            var imageObject = {
-                id: id,
-                title: ((fields.title && fields.title[0]) || ""),
-                isNsfw: ((fields.nsfw && fields.nsfw[0]) || false),
-                size: files.file[0].size,    //in bytes
-                width: fields.width[0] || 0,
-                height: fields.height[0] || 0
-            };
-
-            var image = new Image(imageObject);
-
-            image.save(function(error, result){
-                if (!error)
-                    res.send(result);
-                else {
-                    res.status(500).send('Error uploading image');
-                }
-            });
-
-            console.log(file.filename + ' Written To DB');
-
-        });
+        // decide actions based on file type
+        if (confirmedImageArray.indexOf(contentType) > -1) {
+            main.uploadImage(file, files, fields, tmpPath, extension, id, res);
+        } else if (contentType.indexOf('gifv') > -1) {
+            main.uploadGifv(res);
+        } else {
+            fs.unlink(tmpPath);
+            return res.status(400).send('Unsupported file type.');
+        }
     });
 
 };
@@ -115,7 +80,6 @@ module.exports.getImage = function(req, res){
         });
 
         // increment only if not from my own web page
-        // TODO: update for domain name, and get rid of localhost
         var refer = req.get('Referer');
         if (!refer || (refer.indexOf('newarithmetic') == -1 && refer.indexOf('localhost') == -1))
             utils.incrementEmbededViews(id);
@@ -140,7 +104,13 @@ module.exports.getImagePage = function(req, res) {
 
     var id = req.params.id;
 
-    console.log(req.get('Accept'));
+    // figure out where certain request are coming from: (TEMP)
+    if (!req.get('Accept')){
+        console.log('null accept params referer: ' + req.get('Referer'));
+    }
+    if (req.get('Accept') === '*/*'){
+        console.log('accept all params referer: ' + req.get('Referer'));
+    }
 
     // from the webpage
     if (req.get('Accept') && req.get('Accept').indexOf('text/html') > -1) {
@@ -175,5 +145,45 @@ module.exports.getImagePage = function(req, res) {
             readstream.pipe(res);
         });
     }
+
+};
+
+main.uploadImage = function(file, files, fields, tmpPath, extension, id, res) {
+
+    // streaming to gridfs
+    var writestream = gfs.createWriteStream({
+        filename: id
+    });
+    fs.createReadStream(tmpPath).pipe(writestream);
+
+    writestream.on('close', function (file) {
+
+        var imageObject = {
+            id: id,
+            title: ((fields.title && fields.title[0]) || ""),
+            isNsfw: ((fields.nsfw && fields.nsfw[0]) || false),
+            size: files.file[0].size,    //in bytes
+            width: fields.width[0] || 0,
+            height: fields.height[0] || 0,
+            fileType: extension.substr(1).toUpperCase()
+        };
+
+        var image = new Image(imageObject);
+
+        image.save(function(error, result){
+            if (!error)
+                res.send(result);
+            else {
+                res.status(500).send('Error uploading image');
+            }
+        });
+
+        console.log(file.filename + ' Written To DB');
+
+    });
+};
+
+// TODO
+main.uploadGifv = function(res) {
 
 };

@@ -18,6 +18,6 @@ module.exports = function(app){
     app.get('/api/recentImages', ImageController.getRecentImages);
 
     // upload the image file and some data with it
-    app.post('/uploadImage', ImageController.uploadImage);
+    app.post('/uploadFile', ImageController.uploadFile);
 
 };
