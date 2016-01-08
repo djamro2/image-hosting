@@ -140,8 +140,10 @@ module.exports.getImagePage = function(req, res) {
 
     var id = req.params.id;
 
+    console.log(req.get('Accept'));
+
     // from the webpage
-    if (req.get('Accept').indexOf('text/html') > -1) {
+    if (req.get('Accept') && req.get('Accept').indexOf('text/html') > -1) {
 
         Image.findOne({ id: id }, function(error, image){
             utils.incrementWebsiteViews(id);
