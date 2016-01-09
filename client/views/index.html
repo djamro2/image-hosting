@@ -95,7 +95,7 @@
                 <div layout="row" layout-align="center center">
                     <p ng-if="errorMessage && !successMessage" class="bottom-message red">{{errorMessage}}</p>
                     <p ng-if="successImageId && !errorMessage" class="bottom-message">
-                        <span>Success! Image uploaded at <a ng-href="/media/{{successImageId}}">{{successImageId}}</a> </span>
+                        <span>Success! Image uploaded at <a ng-href="{{getMediaPage(successImageId)}}">{{successImageId}}</a> </span>
                     </p>
                 </div>
 
@@ -119,7 +119,7 @@
         <md-content layout="row" layout-md="column" layout-align="space-around start" layout-padding class="md-whiteframe-8dp">
 
             <div class="image" ng-repeat="image in images">
-                <a ng-href="/media/{{image.id}}">
+                <a ng-href="{{getMediaPage(image.id)}}">
                     <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}">
                     <video ng-if="isVideo(image.id)" autoplay loop>
                         <source ng-src="{{getMediaSrc(image.id)}}" type="video/webm">

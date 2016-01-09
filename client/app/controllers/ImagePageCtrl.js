@@ -14,7 +14,7 @@
 
 	$scope.addViews = function(a, b){
 		return a + b + 1;
-	}
+	};
 
     $scope.convertSize = function(size) {
 
@@ -37,7 +37,7 @@
 
     // return true or false if the path says it is/isn't a video gif
     $scope.isVideo = function() {
-        return ($location.absUrl().indexOf('webm') > -1);
+        return ($location.absUrl().indexOf('webm') > -1 || $location.absUrl().indexOf('gifv') > -1);
     };
 
 	vm.init();

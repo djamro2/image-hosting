@@ -18,7 +18,7 @@
             </div>
             <img ng-if="!isVideo()" src="/api/media/{{id}}"/>
             <video ng-if="isVideo()" autoplay loop>
-                <source src="/api/media/{{id}}" type="video/webm">
+                <source ng-src="/api/media/{{id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
             <div class="image-info">

@@ -22,6 +22,15 @@ angular.module('ImageHosting.controllers', [])
 		});
 	};
 
+	$scope.getMediaPage = function(filename) {
+
+		if (filename.indexOf('webm')) {
+			filename = filename.replace('webm', 'gifv');
+		}
+
+		return "/media/" + filename;
+	};
+
 	$scope.getMediaSrc = function(filename) {
 		return "/api/media/" + filename;
 	};

@@ -152,6 +152,10 @@ module.exports.getMediaPage = function(req, res) {
 
     var id = req.params.id;
 
+    if (id.indexOf('gifv') > -1) {
+        id = id.replace('gifv', 'webm');
+    }
+
     // figure out where certain request are coming from: (TEMP)
     if (!req.get('Accept')){
         console.log('null accept params referer: ' + req.get('Referer'));
