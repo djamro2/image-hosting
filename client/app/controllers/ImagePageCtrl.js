@@ -3,8 +3,8 @@
 
  angular.module('ImageHosting.controllers', [])
 
-.controller('ImagePageController', ['$scope', '$timeout', 'Upload', 'ImageService',
-	function($scope, $timeout, Upload, ImageService){
+.controller('ImagePageController', ['$scope', '$timeout', 'Upload', 'ImageService', '$location',
+	function($scope, $timeout, Upload, ImageService, $location){
 
 	var vm = this;
 
@@ -16,20 +16,29 @@
 		return a + b + 1;
 	}
 
-	$scope.incrementWebViews = function(views) {
-		var result = views + 1;
-		return result;
-	};
+    $scope.convertSize = function(size) {
 
-	$scope.convertSize = function(size) {
-		var result = (size / 1000).toFixed(2) + 'kb';
-		return result;
+        if (size < 1000000) {
+            return (size / 1000).toFixed(2) + 'KB';
+        } else {
+            return (size / 1000000).toFixed(2) + 'MB';
+        }
 	};
 
 	$scope.formatDate = function(date, format) {
 		var result = moment(new Date(date)).format(format);
 		return result;
 	};
+
+	$scope.incrementWebViews = function(views) {
+		var result = views + 1;
+		return result;
+	};
+
+    // return true or false if the path says it is/isn't a video gif
+    $scope.isVideo = function() {
+        return ($location.absUrl().indexOf('webm') > -1);
+    };
 
 	vm.init();
 

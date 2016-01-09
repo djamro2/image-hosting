@@ -3,8 +3,8 @@
 
 angular.module('ImageHosting.controllers', [])
 
-.controller('HomeController', ['$scope', '$timeout', 'Upload', 'ImageService',
-	function($scope, $timeout, Upload, ImageService){
+.controller('HomeController', ['$scope', '$timeout', 'Upload', 'ImageService', '$location',
+	function($scope, $timeout, Upload, ImageService, $location){
 
 	var vm = this;
 
@@ -20,6 +20,14 @@ angular.module('ImageHosting.controllers', [])
 		ImageService.getRecentImages(function(response){
 			$scope.images = response;
 		});
+	};
+
+	$scope.getMediaSrc = function(filename) {
+		return "/api/media/" + filename;
+	};
+
+	$scope.isVideo = function(filename) {
+		return (filename.indexOf('webm') > -1);
 	};
 
 	$scope.updateImageInfo = function(file){

@@ -152,7 +152,8 @@ fieldset {
   width: 200px;
   margin-top: 2rem;
 }
-.recent-pic-wrapper .image img {
+.recent-pic-wrapper .image img,
+.recent-pic-wrapper .image video {
   width: 100%;
 }
 .recent-pic-wrapper .image .image-info .title {

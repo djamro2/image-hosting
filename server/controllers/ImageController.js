@@ -5,6 +5,7 @@ var randomstring = require('randomstring');
 var mongoose     = require('mongoose');
 var Grid         = require('gridfs-stream');
 var moment       = require('moment');
+var ffmpeg = require('fluent-ffmpeg');
 
 var Image        = require('../models/image');
 var utils        = require('../utils');
@@ -25,6 +26,11 @@ if (process.env.NODE_ENV === 'production') {
 Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
 
+// set the app globally
+module.exports.setApp = function(app) {
+    main.app = app;
+};
+
 // take a file and save to db, and save schema info as well (/uploadFile)
 module.exports.uploadFile = function(req, res, next){
 
@@ -38,37 +44,77 @@ module.exports.uploadFile = function(req, res, next){
         var extIndex = tmpPath.lastIndexOf('.');
         var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
 
-        // todo - make sure this isn't the same as something else
+        // TODO: make sure this isn't the same as something else
         var id = randomstring.generate(8) + extension;
 
-        // tested images that work, add more that work
-        var confirmedImageArray = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif' ];
+        // tested files that work, add more that work
+        var confirmedFileArray = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif', 'video/webm' ];
 
-        // decide actions based on file type
-        if (confirmedImageArray.indexOf(contentType) > -1) {
-            main.uploadImage(file, files, fields, tmpPath, extension, id, res);
-        } else if (contentType.indexOf('gifv') > -1) {
-            main.uploadGifv(res);
-        } else {
+        // if we don't have this file type confirmed as working, return error
+        if (confirmedFileArray.indexOf(contentType) === -1) {
             fs.unlink(tmpPath);
             return res.status(400).send('Unsupported file type.');
         }
+
+        // streaming to gridfs
+        var writestream = gfs.createWriteStream({
+            filename: id
+        });
+        fs.createReadStream(tmpPath).pipe(writestream);
+
+        writestream.on('close', function (file) {
+
+            main.getMediaInfo(fields, contentType, tmpPath, function(info){
+
+                //TODO: change names (like model) here and put more logic in getMediaInfo
+
+                var mediaObject = {
+                    id: id,
+                    title: ((fields.title && fields.title[0]) || ""),
+                    isNsfw: ((fields.nsfw && fields.nsfw[0]) || false),
+                    size: files.file[0].size,    //in bytes
+                    width: info.width,
+                    height: info.height,
+                    fileType: extension.substr(1).toUpperCase()
+                };
+
+                var image = new Image(mediaObject);
+
+                image.save(function(error, result){
+                    if (!error)
+                        res.send(result); //TODO: do I need this?
+                    else {
+                        res.status(500).send('Error uploading media object');
+                    }
+                });
+
+                console.log(file.filename + ' Written To DB');
+
+            });
+
+        });
+
     });
 
 };
 
-// return the image file (/api/images/:id)
-module.exports.getImage = function(req, res){
+// return the image file (/api/media/:id)
+module.exports.getMedia = function(req, res){
 
     var id = req.params.id;
 
     gfs.findOne({ filename: id}, function(err, file){
+
         if (err) return res.status(400).send(err);
         if (!file) return res.status(404).send('');
 
         var extension = id.split('.')[1];
 
-        res.set('Content-Type', 'image/' + extension);
+        if (extension === 'webm') {
+            res.set('Content-Type', 'video/' + extension);
+        } else {
+            res.set('Content-Type', 'image/' + extension);
+        }
 
         var readstream = gfs.createReadStream({
             filename: id
@@ -81,12 +127,14 @@ module.exports.getImage = function(req, res){
 
         // increment only if not from my own web page
         var refer = req.get('Referer');
-        if (!refer || (refer.indexOf('newarithmetic') == -1 && refer.indexOf('localhost') == -1))
+        if ((!refer && extension !== 'webm') || ( (refer && refer.indexOf('newarithmetic')) == -1 && (refer && refer.indexOf('localhost') == -1))){
             utils.incrementEmbededViews(id);
+        }
 
         readstream.pipe(res);
     });
 };
+
 
 // for now return the last 4 image data, maybe use param field in the future
 module.exports.getRecentImages = function(req, res){
@@ -100,7 +148,7 @@ module.exports.getRecentImages = function(req, res){
 };
 
 // depending on header, return plain image or html page
-module.exports.getImagePage = function(req, res) {
+module.exports.getMediaPage = function(req, res) {
 
     var id = req.params.id;
 
@@ -124,12 +172,17 @@ module.exports.getImagePage = function(req, res) {
     } else {
 
         gfs.findOne({ filename: id}, function(err, file){
+
             if (err) return res.status(400).send(err);
             if (!file) return res.status(404).send('');
 
             var extension = id.split('.')[1];
 
-            res.set('Content-Type', 'image/' + extension);
+            if (extension === 'webm') {
+                res.set('Content-Type', 'video/' + extension);
+            } else {
+                res.set('Content-Type', 'image/' + extension);
+            }
 
             var readstream = gfs.createReadStream({
                 filename: id
@@ -148,42 +201,44 @@ module.exports.getImagePage = function(req, res) {
 
 };
 
-main.uploadImage = function(file, files, fields, tmpPath, extension, id, res) {
+//return the correct metadata about media object, for now just width and height
+main.getMediaInfo = function(fields, contentType, tmpPath, callback) {
 
-    // streaming to gridfs
-    var writestream = gfs.createWriteStream({
-        filename: id
-    });
-    fs.createReadStream(tmpPath).pipe(writestream);
+    var result = {
+        width: 0,
+        height: 0
+    }
 
-    writestream.on('close', function (file) {
+    if (fields.width && contentType !== 'video/webm') {
+        result.width = fields.width[0];
+    }
 
-        var imageObject = {
-            id: id,
-            title: ((fields.title && fields.title[0]) || ""),
-            isNsfw: ((fields.nsfw && fields.nsfw[0]) || false),
-            size: files.file[0].size,    //in bytes
-            width: fields.width[0] || 0,
-            height: fields.height[0] || 0,
-            fileType: extension.substr(1).toUpperCase()
-        };
+    if (fields.height && contentType !== 'video/webm') {
+        result.height = fields.height[0];
+    }
 
-        var image = new Image(imageObject);
+    //TODO: use node-fluent-ffmpeg to get video metadata
+    if (contentType === 'video/webm') {
 
-        image.save(function(error, result){
-            if (!error)
-                res.send(result);
-            else {
-                res.status(500).send('Error uploading image');
+        ffmpeg.setFfprobePath("c:\\xampp\\ffmpeg\\bin\\ffprobe.exe");
+
+        ffmpeg.ffprobe(tmpPath, function(err, metadata) {
+
+            if (err) {
+                console.log(err);
+                return;
             }
+
+            result.width = metadata.streams[0].width;
+            result.height = metadata.streams[0].height;
+
+            callback(result);
         });
 
-        console.log(file.filename + ' Written To DB');
+    } else {
 
-    });
-};
+        callback(result);
 
-// TODO
-main.uploadGifv = function(res) {
+    }
 
 };
