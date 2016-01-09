@@ -152,10 +152,6 @@ module.exports.getMediaPage = function(req, res) {
 
     var id = req.params.id;
 
-    if (id.indexOf('gifv') > -1) {
-        id = id.replace('gifv', 'webm');
-    }
-
     // figure out where certain request are coming from: (TEMP)
     if (!req.get('Accept')){
         console.log('null accept params referer: ' + req.get('Referer'));
@@ -224,7 +220,9 @@ main.getMediaInfo = function(fields, contentType, tmpPath, callback) {
     //TODO: use node-fluent-ffmpeg to get video metadata
     if (contentType === 'video/webm') {
 
-        ffmpeg.setFfprobePath("c:\\xampp\\ffmpeg\\bin\\ffprobe.exe");
+        if (process.platform === 'win32'){
+            ffmpeg.setFfprobePath("c:\\xampp\\ffmpeg\\bin\\ffprobe.exe");
+        }
 
         ffmpeg.ffprobe(tmpPath, function(err, metadata) {
 

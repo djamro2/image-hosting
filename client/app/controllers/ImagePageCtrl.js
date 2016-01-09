@@ -9,7 +9,7 @@
 	var vm = this;
 
 	vm.init = function(){
-		//nothing right now
+		// nothing right now
 	};
 
 	$scope.addViews = function(a, b){
@@ -36,8 +36,8 @@
 	};
 
     // return true or false if the path says it is/isn't a video gif
-    $scope.isVideo = function() {
-        return ($location.absUrl().indexOf('webm') > -1 || $location.absUrl().indexOf('gifv') > -1);
+    $scope.isVideo = function(filetype) {
+        return (filetype === 'WEBM' || filetype === 'GIFV');
     };
 
 	vm.init();

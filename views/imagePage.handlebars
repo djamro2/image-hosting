@@ -16,8 +16,8 @@
                     <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')" class="uploaded-date"></span>
                 </p>
             </div>
-            <img ng-if="!isVideo()" src="/api/media/{{id}}"/>
-            <video ng-if="isVideo()" autoplay loop>
+            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
+            <video ng-if="isVideo('{{fileType}}')" autoplay loop>
                 <source ng-src="/api/media/{{id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>

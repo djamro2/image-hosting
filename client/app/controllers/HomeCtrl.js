@@ -23,11 +23,6 @@ angular.module('ImageHosting.controllers', [])
 	};
 
 	$scope.getMediaPage = function(filename) {
-
-		if (filename.indexOf('webm')) {
-			filename = filename.replace('webm', 'gifv');
-		}
-
 		return "/media/" + filename;
 	};
 
@@ -36,7 +31,7 @@ angular.module('ImageHosting.controllers', [])
 	};
 
 	$scope.isVideo = function(filename) {
-		return (filename.indexOf('webm') > -1);
+		return (filename.indexOf('webm') > -1 || filename.indexOf('gifv') > -1);
 	};
 
 	$scope.updateImageInfo = function(file){
