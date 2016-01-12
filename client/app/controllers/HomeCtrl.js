@@ -23,7 +23,7 @@ angular.module('ImageHosting.controllers', [])
 	};
 
 	$scope.getMediaPage = function(filename) {
-		return "/media/" + filename;
+		return "/" + filename;
 	};
 
 	$scope.getMediaSrc = function(filename) {

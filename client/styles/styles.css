@@ -63,9 +63,11 @@ fieldset {
 .image-page .image-container .image-raw .image-header .uploaded-on .uploaded-date {
   font-style: italic;
 }
-.image-page .image-container .image-raw img {
+.image-page .image-container .image-raw img,
+.image-page .image-container .image-raw video {
   margin-top: .5rem;
   max-width: 960px;
+  min-width: 400px;
   border: 1px solid black;
 }
 .image-page .image-container .image-info {

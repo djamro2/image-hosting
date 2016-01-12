@@ -11,7 +11,7 @@ module.exports = function(app){
     app.get('/app/views/policy.html', HomeController.getPolicyPage);
 
     // returns the image page (or image)
-    app.get('/media/:id', ImageController.getMediaPage);
+    app.get('/:id', ImageController.getMediaPage);
 
     // other sorts of media (like webm)
     app.get('/api/media/:id', ImageController.getMedia);

@@ -3,7 +3,7 @@
 
     <div class="simple-navbar">
         <a class="homepage-link" href="/">
-            <h2 class="header">imgtoast</h2>
+            <h2 class="header">gifmage</h2>
         </a>
     </div>
 
@@ -11,10 +11,6 @@
         <div class="image-raw">
             <div class="image-header">
                 <p class="title">{{title}}</p>
-                <p class="uploaded-on">
-                    <span>Uploaded: </span>
-                    <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')" class="uploaded-date"></span>
-                </p>
             </div>
             <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
             <video ng-if="isVideo('{{fileType}}')" autoplay loop>
@@ -27,7 +23,7 @@
                 <p>Original dimensions: {{width}}px x {{height}}px</p>
                 <p>Uploaded by: <span class="username">anonymous</span></p>
                 <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
-                <p>File Type: {{fileType}}</p>
+                <!-- <p>File Type: {{fileType}}</p> -->
             </div>
         </div>
     </div>
