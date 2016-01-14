@@ -120,7 +120,7 @@
 
             <div class="image" ng-repeat="image in images">
                 <a ng-href="{{getMediaPage(image.id)}}">
-                    <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}">
+                    <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}" />
                     <video ng-if="isVideo(image.id)" autoplay loop>
                         <source ng-src="{{getMediaSrc(image.id)}}" type="video/webm">
                         Your browser does not support the video tag.
@@ -128,7 +128,7 @@
                 </a>
                 <div class="image-info" layout="row">
                     <div flex="75" class="title">{{image.title}}</div>
-                    <div flex="25" class="views">{{image.viewsEmbeded + image.viewsWebsite + 1}} views</div>
+                    <div flex="25" class="views">{{image.viewsEmbeded + image.viewsWebsite + 1}} {{(image.viewsEmbeded + image.viewsWebsite) == 0 ? 'view' : 'views'}}</div>
                 </div>
             </div>
 

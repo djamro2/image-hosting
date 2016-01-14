@@ -12,18 +12,22 @@
             <div class="image-header">
                 <p class="title">{{title}}</p>
             </div>
-            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
+            <img ng-class="{widerImage: dimensionRatio >= 1}" ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
             <video ng-if="isVideo('{{fileType}}')" autoplay loop>
                 <source ng-src="/api/media/{{id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
-            <div class="image-info">
-                <p>Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span></p>
+            <div class="image-info" ng-init="setScopeData({{width}}, {{height}}, '{{title}}')">
+                <p class="top-info-line">
+                    Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span>
+                    <span class="amazon-link" ng-if="dimensionRatio >= 1 && '{{title}}' != ''" ng-click="goToAmazonLink('{{title}}')">
+                        Search '{{title}}' on Amazon
+                    </span>
+                </p>
                 <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
                 <p>Original dimensions: {{width}}px x {{height}}px</p>
                 <p>Uploaded by: <span class="username">anonymous</span></p>
                 <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
-                <!-- <p>File Type: {{fileType}}</p> -->
             </div>
         </div>
     </div>

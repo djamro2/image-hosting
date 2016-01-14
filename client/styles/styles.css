@@ -20,6 +20,9 @@ fieldset {
 .red {
   color: red;
 }
+.widerImage {
+  min-width: 500px!important;
+}
 .image-page {
   text-align: center;
 }
@@ -74,10 +77,20 @@ fieldset {
   text-align: left;
   margin-top: .75rem;
   padding-bottom: 5rem;
+  display: inline;
 }
 .image-page .image-container .image-info p {
   font-size: .8rem;
   margin: .4rem 0;
+}
+.image-page .image-container .image-info .top-info-line {
+  text-align: left;
+}
+.image-page .image-container .image-info .top-info-line .amazon-link {
+  float: right;
+  color: orange;
+  font-weight: bold;
+  cursor: pointer;
 }
 .image-page .image-container .image-info .username {
   font-style: italic;
