@@ -20,7 +20,7 @@
             <div class="image-info" ng-init="setScopeData({{width}}, {{height}}, '{{title}}')">
                 <p class="top-info-line">
                     Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span>
-                    <span class="amazon-link" ng-if="dimensionRatio >= 1 && '{{title}}' != ''" ng-click="goToAmazonLink('{{title}}')">
+                    <span class="amazon-link" ng-if="( {{width}} > 450 || dimensionRatio >= 1) && '{{title}}' != ''" ng-click="goToAmazonLink('{{title}}')">
                         Search '{{title}}' on Amazon
                     </span>
                 </p>
