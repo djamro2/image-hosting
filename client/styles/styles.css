@@ -22,22 +22,30 @@ fieldset {
 .widerImage {
   min-width: 500px!important;
 }
-.image-page {
-  text-align: center;
-}
-.image-page .simple-navbar {
+.simple-navbar {
   border-bottom: 1px solid #DCDCDC;
 }
-.image-page .simple-navbar .homepage-link {
+.simple-navbar .homepage-link {
   text-decoration: none;
 }
-.image-page .simple-navbar .homepage-link .header {
+.simple-navbar .homepage-link .header {
   color: black;
   font-family: saxmono;
   color: grey;
   margin: 0;
   padding-top: .3rem;
-  padding-bottom: .3rem;
+  padding-bottom: .1rem;
+  text-align: center;
+}
+.simple-navbar .bottom-text {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  font-family: saxmono;
+  padding-bottom: .2rem;
+}
+.image-page {
+  text-align: center;
 }
 .image-page .image-container {
   position: relative;

@@ -11,6 +11,11 @@ angular.module('ImageHosting.factories', [])
 			method: 'GET',
 			url: '/api/recentImages',
 			isArray: true
+		},
+		getPopularImages: {
+			method: 'GET',
+			url: '/api/popularImages',
+			isArray: true
 		}
 	});
 

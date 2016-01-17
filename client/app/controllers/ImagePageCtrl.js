@@ -13,7 +13,8 @@
 	};
 
 	$scope.addViews = function(a, b){
-		return a + b + 1;
+        var result = (a+b+1);
+        return result.toLocaleString();
 	};
 
     $scope.convertSize = function(size) {

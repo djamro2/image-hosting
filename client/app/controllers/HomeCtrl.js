@@ -17,8 +17,8 @@ angular.module('ImageHosting.controllers', [])
 	$scope.fileName = "no file chosen";
 
 	vm.init = function(){
-		ImageService.getRecentImages(function(response){
-			$scope.images = response;
+		ImageService.getPopularImages(function(response){
+			$scope.popularImages = response;
 		});
 	};
 

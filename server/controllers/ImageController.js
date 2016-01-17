@@ -147,6 +147,30 @@ module.exports.getRecentImages = function(req, res){
     });
 };
 
+// get the 4 more popular images
+module.exports.getPopularImages = function(req, res){
+
+    Image.aggregate()
+          .project({
+               "viewsEmbeded": 1,
+               "viewsWebsite": 1,
+               "id": 1,
+               "title": 1,
+               "isNsfw": 1,
+               "size": 1,
+               "width": 1,
+               "height": 1,
+               "fileType": 1,
+               "date": 1,
+               "totalViews": { "$add": [ "$viewsEmbeded", "$viewsWebsite" ] }
+          })
+          .sort("-totalViews")
+          .limit(4)
+          .exec(function (err, result) {
+              res.send(result);
+          });
+};
+
 // depending on header, return plain image or html page
 module.exports.getMediaPage = function(req, res) {
 

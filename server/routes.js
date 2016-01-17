@@ -19,6 +19,9 @@ module.exports = function(app){
     // return last 4 images uploaded
     app.get('/api/recentImages', ImageController.getRecentImages);
 
+    // get the 4 most popular images
+    app.get('/api/popularImages', ImageController.getPopularImages);
+
     // upload the image file and some data with it
     app.post('/uploadFile', ImageController.uploadFile);
 

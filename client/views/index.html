@@ -43,15 +43,16 @@
 
     <div id="container-all">
 
-    <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
+    <div class="simple-navbar">
+        <a class="homepage-link" href="/">
+            <h2 class="header">gifmage</h2>
+        </a>
+        <p class="bottom-text">
+            anonymously upload images
+        </p>
+    </div>
 
-        <md-toolbar class="md-whiteframe-1dp toolbar-header">
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex upload-heading">
-                    <a href="/">gifmage</a>
-                </h2>
-            </div>
-        </md-toolbar>
+    <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
 
         <md-toolbar class="md-accent md-whiteframe-1dp upload-heading">
             <div class="md-toolbar-tools">
@@ -112,13 +113,13 @@
 
         <md-toolbar class="md-accent md-whiteframe-1dp">
             <div class="md-toolbar-tools">
-                <h2 class="md-flex upload-heading">Recent Images</h2>
+                <h2 class="md-flex upload-heading">Popular Images</h2>
             </div>
         </md-toolbar>
 
         <md-content layout="row" layout-md="column" layout-align="space-around start" layout-padding class="md-whiteframe-8dp">
 
-            <div class="image" ng-repeat="image in images">
+            <div class="image" ng-repeat="image in popularImages">
                 <a ng-href="{{getMediaPage(image.id)}}">
                     <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}" />
                     <video ng-if="isVideo(image.id)" autoplay loop>
@@ -128,7 +129,7 @@
                 </a>
                 <div class="image-info" layout="row">
                     <div flex="75" class="title">{{image.title}}</div>
-                    <div flex="25" class="views">{{image.viewsEmbeded + image.viewsWebsite + 1}} {{(image.viewsEmbeded + image.viewsWebsite) == 0 ? 'view' : 'views'}}</div>
+                    <div flex="25" class="views">{{(image.viewsEmbeded + image.viewsWebsite + 1) | number:0}} {{(image.viewsEmbeded + image.viewsWebsite) == 0 ? 'view' : 'views'}}</div>
                 </div>
             </div>
 
