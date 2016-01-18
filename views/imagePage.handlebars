@@ -29,10 +29,38 @@
                 </p>
                 <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
                 <p>Original dimensions: {{width}}px x {{height}}px</p>
-                <p>Uploaded by: <span class="username">anonymous</span></p>
+                <!-- <p>Uploaded by: <span class="username">anonymous</span></p> -->
                 <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
             </div>
         </div>
     </div>
+
+    <!-- <div layout="column" layout-align="center center" class="recent-pic-wrapper" ng-cloak>
+
+        <md-toolbar class="md-accent md-whiteframe-1dp">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex upload-heading">Popular Images</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout="row" layout-md="column" layout-align="space-around start" layout-padding class="md-whiteframe-8dp">
+
+            <div class="image" ng-repeat="image in popularImages">
+                <a ng-href="getMediaPage(image.id)">
+                    <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}" />
+                    <video ng-if="isVideo(image.id)" autoplay loop>
+                        <source ng-src="getMediaSrc(image.id)" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+                <div class="image-info" layout="row">
+                    <div flex="75" class="title"></div>
+                    <div flex="25" class="views"></div>
+                </div>
+            </div>
+
+        </md-content>
+
+    </div> -->
 
 </div>

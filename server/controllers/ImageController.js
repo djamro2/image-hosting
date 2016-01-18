@@ -16,12 +16,7 @@ var Schema = mongoose.Schema;
 var conn = mongoose.connection;
 
 // connect to mongoose
-if (process.env.NODE_ENV === 'production') {
-    var connectionString = 'mongodb://' + local_codes.internal_ip + ':' + local_codes.data_port + '/imageHosting';
-    mongoose.connect(connectionString);
-} else {
-    mongoose.connect('mongodb://127.0.0.1/imageHosting');
-}
+mongoose.connect('mongodb://127.0.0.1/imageHosting');
 
 Grid.mongo = mongoose.mongo;
 var gfs = Grid(conn.db);
