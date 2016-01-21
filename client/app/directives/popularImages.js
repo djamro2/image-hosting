@@ -32,11 +32,11 @@ directives.directive('popularImages', function(ImageService){
 
                 } else if (attrs && attrs.imagewidth) {
 
-                    if (attrs.imagewidth > 960) {
+                    if (attrs.imagewidth >= 960) {
                         element.children()[0].style.maxWidth = '960px';
-                    } else if (attrs.imagewidth/attrs.imageheight >= 1) {
+                    } else if (attrs.imagewidth <= 500 && attrs.imagewidth/attrs.imageheight >= 1) {
                         element.children()[0].style.maxWidth = '500px';
-                    } else if (attrs.imagewidth < 400) {
+                    } else if (attrs.imagewidth <= 400) {
                         element.children()[0].style.maxWidth = '400px';
                     } else {
                         element.children()[0].style.maxWidth = attrs.imagewidth;
