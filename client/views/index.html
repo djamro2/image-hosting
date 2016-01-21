@@ -6,8 +6,15 @@
     <link rel="shortcut icon" href="/styles/favicon.ico" />
 
     <link rel="stylesheet" href="/styles/styles.css">
+    <link rel='stylesheet' href='/styles/perfect-scrollbar.min.css' />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.css">
 
+    <!-- jquery and dependencies -->
+    <script type="text/javascript" src="/scripts/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="/scripts/perfect-scrollbar.jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/perfect-scrollbar.min.js"></script>
+
+    <!-- angular dependencies -->
     <script type="text/javascript" src="/scripts/angular.min.js"></script>
     <script type="text/javascript" src="/scripts/angular-resource.min.js"></script>
     <script type="text/javascript" src="/scripts/angular-route.min.js"></script>
@@ -20,9 +27,11 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 
+    <script type="text/javascript" src="/app/directives/gifmageNavbar.js"></script>
     <script type="text/javascript" src="/app/services/ImageService.js"></script>
     <script type="text/javascript" src="/app/controllers/HomeCtrl.js"></script>
     <script type="text/javascript" src="/app/directives/buttonAsInput.js"></script>
+    <script type="text/javascript" src="/app/directives/popularImages.js"></script>
     <script type="text/javascript" src="/app/app.js"></script>
 
     <script>
@@ -43,14 +52,7 @@
 
     <div id="container-all">
 
-    <div class="simple-navbar">
-        <a class="homepage-link" href="/">
-            <h2 class="header">gifmage</h2>
-        </a>
-        <p class="bottom-text">
-            the fastest way to anonymously upload content
-        </p>
-    </div>
+    <gifmage-navbar></gifmage-navbar>
 
     <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
 
@@ -67,8 +69,6 @@
                 <form name="uploadForm">
 
                 <fieldset>
-
-                <!-- <p class="uploadedBy">Uploading as <span>anonymous</span></p> -->
 
                 <md-input-container>
                     <label>Title (optional)</label>
@@ -109,33 +109,7 @@
 
     </div>
 
-    <div layout="column" layout-align="center center" class="recent-pic-wrapper" ng-cloak>
-
-        <md-toolbar class="md-accent md-whiteframe-1dp">
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex upload-heading">Popular Images</h2>
-            </div>
-        </md-toolbar>
-
-        <md-content layout="row" layout-md="column" layout-align="space-around start" layout-padding class="md-whiteframe-8dp">
-
-            <div class="image" ng-repeat="image in popularImages">
-                <a ng-href="{{getMediaPage(image.id)}}">
-                    <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}" />
-                    <video ng-if="isVideo(image.id)" autoplay loop>
-                        <source ng-src="{{getMediaSrc(image.id)}}" type="video/webm">
-                        Your browser does not support the video tag.
-                    </video>
-                </a>
-                <div class="image-info" layout="row">
-                    <div flex="75" class="title">{{image.title}}</div>
-                    <div flex="25" class="views">{{(image.viewsEmbeded + image.viewsWebsite + 1) | number:0}} {{(image.viewsEmbeded + image.viewsWebsite) == 0 ? 'view' : 'views'}}</div>
-                </div>
-            </div>
-
-        </md-content>
-
-    </div>
+    <popular-images maxwidth="960px"></popular-images>
 
     <div class="footer">
         @2016 <a href="/">gifmage</a> • contact at djamrozik96@gmail.com

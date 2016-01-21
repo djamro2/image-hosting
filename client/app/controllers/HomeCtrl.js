@@ -17,21 +17,7 @@ angular.module('ImageHosting.controllers', [])
 	$scope.fileName = "no file chosen";
 
 	vm.init = function(){
-		ImageService.getPopularImages(function(response){
-			$scope.popularImages = response;
-		});
-	};
-
-	$scope.getMediaPage = function(filename) {
-		return "/" + filename;
-	};
-
-	$scope.getMediaSrc = function(filename) {
-		return "/api/media/" + filename;
-	};
-
-	$scope.isVideo = function(filename) {
-		return (filename.indexOf('webm') > -1 || filename.indexOf('gifv') > -1);
+		//nothing here right now
 	};
 
 	$scope.updateImageInfo = function(file){

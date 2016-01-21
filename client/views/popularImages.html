@@ -1,0 +1,27 @@
+<div layout="column" layout-align="center center" id="popular-wrapper" ng-cloak>
+
+    <md-toolbar class="md-accent md-whiteframe-1dp">
+        <div class="md-toolbar-tools">
+            <h2 class="md-flex upload-heading">Popular Images</h2>
+        </div>
+    </md-toolbar>
+
+    <md-content layout="row" layout-align="space-around" class="md-whiteframe-8dp popular-image-row">
+
+        <div class="image" flex="25" ng-repeat="image in popularImages" index="{{$index}}">
+            <a ng-href="{{getMediaPage(image.id)}}">
+                <img ng-if="!isVideo(image.id)" ng-src="/api/media/{{image.id}}" alt="{{image.title}}" />
+                <video ng-if="isVideo(image.id)" autoplay loop>
+                    <source ng-src="{{getMediaSrc(image.id)}}" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+            <div class="image-info" layout="row">
+                <div flex="75" class="title">{{image.title}}</div>
+                <div flex="25" class="views">{{(image.viewsEmbeded + image.viewsWebsite + 1) | number:0}} {{(image.viewsEmbeded + image.viewsWebsite) == 0 ? 'view' : 'views'}}</div>
+            </div>
+        </div>
+
+    </md-content>
+
+</div>

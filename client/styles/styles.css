@@ -55,7 +55,6 @@ fieldset {
 .image-page .image-container .image-raw {
   display: inline-block;
   max-width: 960px;
-  padding-bottom: 3rem;
   margin: auto;
 }
 .image-page .image-container .image-raw .image-header {
@@ -153,37 +152,46 @@ fieldset {
   margin: 1rem auto;
   margin-top: 2rem;
 }
-.recent-pic-wrapper {
-  margin-top: 50px;
+#popular-wrapper {
   padding-bottom: 2rem;
+  margin: auto;
+  margin-top: 50px;
 }
-.recent-pic-wrapper md-toolbar {
-  max-width: 960px;
+#popular-wrapper .popular-image-row {
+  position: relative;
+  height: 100%;
 }
-.recent-pic-wrapper md-toolbar h2 {
+#popular-wrapper md-toolbar h2 {
   margin: auto;
 }
-.recent-pic-wrapper md-content {
-  width: 960px;
+#popular-wrapper md-content {
   padding: 0;
   text-align: center;
   margin-bottom: 2rem;
 }
-.recent-pic-wrapper .image {
+#popular-wrapper .image {
   max-height: 400px;
-  width: 200px;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  min-width: 175px;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
 }
-.recent-pic-wrapper .image img,
-.recent-pic-wrapper .image video {
+#popular-wrapper .image:first-child {
+  padding-left: .5rem;
+}
+#popular-wrapper .image[index="3"] {
+  padding-right: .5rem!important;
+}
+#popular-wrapper .image img,
+#popular-wrapper .image video {
   width: 100%;
 }
-.recent-pic-wrapper .image .image-info .title {
+#popular-wrapper .image .image-info .title {
   text-align: left;
   margin-left: .2rem;
-  width: 150px;
+  width: 100%;
 }
-.recent-pic-wrapper .image .image-info .views {
+#popular-wrapper .image .image-info .views {
   text-align: right;
   margin-right: .2rem;
   font-size: .7rem;
@@ -249,4 +257,10 @@ fieldset {
 @font-face {
   font-family: saxmono;
   src: url(/styles/saxmono.ttf);
+}
+.nano-pane {
+  background: #888;
+}
+.nano-slider {
+  background: #111;
 }

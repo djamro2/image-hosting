@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ImageHosting.directives', [])
+var directives = directives || angular.module('ImageHosting.directives', []);
 
-.directive('buttonAsInput', function(){
+directives.directive('buttonAsInput', function(){
 	return {
 	    restrict: 'A',
         link: function(scope, element, attrs) {

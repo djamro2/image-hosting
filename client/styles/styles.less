@@ -70,7 +70,6 @@ fieldset {
 
             display: inline-block;
             max-width: 960px;
-            padding-bottom: 3rem;
             margin: auto;
 
             .image-header {
@@ -203,14 +202,18 @@ fieldset {
     }
 }
 
-.recent-pic-wrapper {
+#popular-wrapper {
 
-    margin-top: 50px;
     padding-bottom: 2rem;
+    margin: auto;
+    margin-top: 50px;
+
+    .popular-image-row {
+        position: relative;
+        height: 100%;
+    }
 
     md-toolbar {
-
-        max-width: 960px;
 
         h2 {
             margin: auto;
@@ -218,8 +221,6 @@ fieldset {
     }
 
     md-content {
-
-        width: 960px;
         padding: 0;
         text-align: center;
         margin-bottom: 2rem;
@@ -228,8 +229,18 @@ fieldset {
     .image {
 
         max-height: 400px;
-        width: 200px;
-        margin-top: 2rem;
+        margin-top: 1rem;
+        min-width: 175px;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+
+        &:first-child {
+            padding-left: .5rem;
+        }
+
+        &[index="3"] {
+            padding-right: .5rem!important;
+        }
 
         img, video {
             width: 100%;
@@ -240,7 +251,7 @@ fieldset {
             .title {
                 text-align: left;
                 margin-left: .2rem;
-                width: 150px;
+                width: 100%;
             }
 
             .views {
@@ -349,3 +360,7 @@ fieldset {
     font-family: saxmono;
     src: url(/styles/saxmono.ttf);
 }
+
+// nanoscroller stuff
+.nano-pane   { background: #888; }
+.nano-slider { background: #111; }
