@@ -6,6 +6,7 @@ body {
   position: relative;
   display: block;
   min-height: 100%;
+  background-color: #f1f1f1;
 }
 fieldset {
   border: none;
@@ -22,27 +23,50 @@ fieldset {
 .widerImage {
   min-width: 500px!important;
 }
+
+.upload {
+  /*box-shadow: 3px 1px 5px #1a1a1a;*/
+  background: #004c99;
+  width: 960px;
+  opacity: .8;
+}
+.upload .upload-text {
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 30px;
+  padding: 12px;
+  margin: auto;
+  font-family: optima;
+}
 .simple-navbar {
-  border-bottom: 1px solid #DCDCDC;
+  box-shadow: 5px 1px 8px #1a1a1a;
+  background: #ffffff;
+  padding-bottom: 3px;
 }
 .simple-navbar .homepage-link {
   text-decoration: none;
 }
 .simple-navbar .homepage-link .header {
-  color: black;
   font-family: saxmono;
-  color: grey;
+  font-size: 35px;
+  color: #333333;
   margin: 0;
   padding-top: .3rem;
-  padding-bottom: .1rem;
   text-align: center;
 }
 .simple-navbar .bottom-text {
   width: 100%;
   text-align: center;
+  color: #004c99;
+  font-style: italic;
+  font-weight: bold;
+  opacity: .8;
   margin: auto;
-  font-family: saxmono;
-  padding-bottom: .2rem;
+  font-family: optima;
+  padding-bottom: .1rem;
 }
 .image-page {
   text-align: center;
@@ -79,6 +103,7 @@ fieldset {
   max-width: 960px;
   min-width: 400px;
   border: 1px solid black;
+  background-color: #ffffff;
 }
 .image-page .image-container .image-info {
   text-align: left;

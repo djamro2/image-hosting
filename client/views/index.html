@@ -54,13 +54,21 @@
 
     <gifmage-navbar></gifmage-navbar>
 
+    <br>
+
     <div layout="column" layout-align="center center" class="upload-wrapper" ng-cloak>
 
-        <md-toolbar class="md-accent md-whiteframe-1dp upload-heading">
-            <div class="md-toolbar-tools">
-                <h2 class="md-flex upload-heading">Upload Image</h2>
+        <!-- <md-toolbar class="md-accent md-whiteframe-1dp upload-heading">
+            <div class="upload">
+                <h2 class="upload-text">Upload Image</h2>
             </div>
-        </md-toolbar>
+        </md-toolbar> -->
+
+
+        <div class="upload">
+        <h2 class="upload-text">Upload Image</h2>
+
+        </div>
 
         <md-content layout-align="center center" layout-padding class="md-whiteframe-8dp component-content">
 
@@ -96,7 +104,7 @@
                 <div layout="row" layout-align="center center">
                     <p ng-if="errorMessage && !successMessage" class="bottom-message red">{{errorMessage}}</p>
                     <p ng-if="successImageId && !errorMessage" class="bottom-message">
-                        <span>Success! Image uploaded at <a ng-href="{{getMediaPage(successImageId)}}">{{successImageId}}</a> </span>
+                        <span>Success! Image uploaded at <a ng-href="{{getMediaPage(successImageId)}}">{{successImageId}}</a></span>
                     </p>
                 </div>
 
@@ -112,7 +120,7 @@
     <popular-images maxwidth="960px"></popular-images>
 
     <div class="footer">
-        @2016 <a href="/">gifmage</a> • contact at djamrozik96@gmail.com
+        @2016 <a href="/">gifmage</a>
     </div>
 
     </div>
