@@ -30,7 +30,6 @@ fieldset {
   width: 960px;
   opacity: .8;
 }
-
 .upload .upload-text {
   width: 100%;
   text-align: center;
@@ -40,24 +39,12 @@ fieldset {
   font-size: 30px;
   padding: 12px;
   margin: auto;
-  font-family: 'Bitter', sans-serif, optima;
+  font-family: optima;
 }
-
-.upload-banner {
-    margin-top: 100px;
-}
-
 .simple-navbar {
   box-shadow: 5px 1px 8px #1a1a1a;
   background: #ffffff;
   padding-bottom: 3px;
-  position: fixed;
-  width: 100%;
-  z-index: 11;
-  max-height: 70px;
-  top: 0;
-  left: 0;
-  right: 0;
 }
 .simple-navbar .homepage-link {
   text-decoration: none;
@@ -65,10 +52,9 @@ fieldset {
 .simple-navbar .homepage-link .header {
   font-family: saxmono;
   font-size: 35px;
-  line-height: 35px;
   color: #333333;
   margin: 0;
-  padding-bottom: .15rem;
+  padding-top: .3rem;
   text-align: center;
 }
 .simple-navbar .bottom-text {
@@ -88,7 +74,7 @@ fieldset {
 .image-page .image-container {
   position: relative;
   margin: auto;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 .image-page .image-container .image-raw {
   display: inline-block;

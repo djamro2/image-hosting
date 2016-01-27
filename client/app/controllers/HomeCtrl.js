@@ -31,11 +31,11 @@ angular.module('ImageHosting.controllers', [])
 			$scope.errorMessage = '';
 		}
 
-		Upload.imageDimensions(file).then(function(d){
+	    Upload.imageDimensions(file).then(function(d){
 			$scope.image.width = d.width;
 			$scope.image.height = d.height;
 		});
-	};
+    };
 
 	$scope.uploadFile = function(file){
 

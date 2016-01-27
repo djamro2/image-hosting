@@ -122,7 +122,7 @@ module.exports.getMedia = function(req, res){
 
         // increment only if not from my own web page
         var refer = req.get('Referer');
-        if ((!refer && extension !== 'webm') || ( (refer && refer.indexOf('newarithmetic')) == -1 && (refer && refer.indexOf('localhost') == -1))){
+        if ((!refer && extension !== 'webm') || ( (refer && refer.indexOf('gifmage')) == -1 && (refer && refer.indexOf('localhost') == -1))){
             utils.incrementEmbededViews(id);
         }
 

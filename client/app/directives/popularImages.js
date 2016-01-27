@@ -39,7 +39,7 @@ directives.directive('popularImages', function(ImageService){
                     } else if (attrs.imagewidth <= 400) {
                         element.children()[0].style.maxWidth = '400px';
                     } else {
-                        element.children()[0].style.maxWidth = attrs.imagewidth;
+                        element.children()[0].style.maxWidth = attrs.imagewidth + 'px';
                     }
 
                 }
