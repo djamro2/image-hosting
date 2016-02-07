@@ -3,11 +3,36 @@ var express    = require('express');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');
 
-var app = express();
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+var expressSession = require('express-session');
+var bCrypt         = require('bcrypt-nodejs');
+var flash          = require('connect-flash');
+
 var local_codes = require('./local_codes');
+var initPassport = require('./server/passport/init');
+var Image = require('./server/models/image');
+
+var app = express();
 
 // middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('client'));
+
+// express session
+app.use(expressSession({
+  secret: 'mySecretKey',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Using the flash middleware provided by connect-flash to store messages in session and displaying in templates
+app.use(flash());
+
+// Initialize Passport
+initPassport(passport);
 
 // handlebars engine
 app.engine('handlebars', handlebars({defaultLayout: 'main'}) );
@@ -33,40 +58,62 @@ if (!isProduction) {
       var port = server.address().port;
       console.log('Image hosting app listening at http://%s:%s', host, port);
     });
-
 }
+
+
+// ROUTE HANDLING FOR PASSPORT
+
+// As with any middleware it is quintessential to call next() if the user is authenticated
+var isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+}
+
+app.post('/login', passport.authenticate('login', {
+    successRedirect: '/admin/dashboard',
+    failureRedirect: '/',
+    failureFlash : true
+}));
+
+app.get('/admin/login', function(req, res){
+    res.sendFile(__dirname + '/client/views/adminLogin.html');
+});
+
+app.get('/admin/dashboard', isAuthenticated, function(req, res){
+
+    // get all the images!
+    Image.find({})
+         .sort('-date')
+         .exec(function(err, images){
+             res.render('adminDashboard', {images: images, title: 'Gifmage Admin'});
+    });
+});
+
+
+// CLOSE EXPRESS
 
 var sockets = [];
 server.on('connection', function(socket){
     sockets.push(socket);
-})
-
+});
 var shutDownApp = function() {
-
     sockets.forEach(function(socket) {
         socket.destroy();
     });
-
     server.close(function(){
         console.log("Express connection closed");
         process.exit();
     });
-
     setTimeout( function () {
         console.error("Could not close connections in time, forcefully shutting down");
         process.exit(1);
     }, 20*1000);
 };
-
 process.stdin.resume(); //so program doesn't close instantly
 process.on('SIGINT', shutDownApp);
 process.on('exit', shutDownApp);
-
 process.on('uncaughtException', function(err){
     console.log(err);
     console.log("Node caught an exception, not shutting down");
 });
-
-// bugs to work on
-//
-// make sure image is not taller than screen size, if so, scale (not urgent)

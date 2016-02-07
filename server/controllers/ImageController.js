@@ -5,7 +5,8 @@ var randomstring = require('randomstring');
 var mongoose     = require('mongoose');
 var Grid         = require('gridfs-stream');
 var moment       = require('moment');
-var ffmpeg = require('fluent-ffmpeg');
+var path         = require('path');
+var ffmpeg       = require('fluent-ffmpeg');
 
 var Image        = require('../models/image');
 var utils        = require('../utils');
@@ -217,6 +218,13 @@ module.exports.getMediaPage = function(req, res) {
             readstream.pipe(res);
         });
     }
+};
+
+module.exports.getAllImages = function(req, res) {
+
+    Image.find( {}, function(error, images){
+        res.send(images);
+    });
 
 };
 

@@ -13,7 +13,7 @@ module.exports = function(app){
     // returns the image page (or image)
     app.get('/:id', ImageController.getMediaPage);
 
-    // other sorts of media (like webm)
+    // retrieve raw media
     app.get('/api/media/:id', ImageController.getMedia);
 
     // return last 4 images uploaded
