@@ -1,7 +1,7 @@
 /* global angular */
 'use strict';
 
-angular.module('ImageHosting.controllers', [])
+angular.module('gifmage.controllers', [])
 
 .controller('HomeController', ['$scope', '$timeout', 'Upload', 'ImageService', '$location',
 	function($scope, $timeout, Upload, ImageService, $location){

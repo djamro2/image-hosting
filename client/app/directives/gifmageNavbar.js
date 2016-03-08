@@ -1,6 +1,6 @@
 'use strict';
 
-var directives = directives || angular.module('ImageHosting.directives', []);
+var directives = directives || angular.module('gifmage.directives', []);
 
 directives.directive('gifmageNavbar', function(){
 	return {

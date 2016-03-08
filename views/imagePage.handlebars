@@ -1,32 +1,38 @@
 
+<!-- the page containing the image itself, loaded with handlebars -->
+
 <div class="image-page" ng-controller="ImagePageController">
 
     <gifmage-navbar></gifmage-navbar>
 
-    <div class="image-container">
-        <div class="image-raw">
+    <div class="content-container" layout="row">
+       
+        <!-- contains just the image, image title, and some image info -->
+        <div class="image-content-left">
+
             <div class="image-header">
                 <p class="title">{{title}}</p>
             </div>
-            <img ng-class="{widerImage: dimensionRatio >= 1}" ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
+       
+            <!-- for regular images --> 
+            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
+        
+            <!-- for videos -->
             <video ng-if="isVideo('{{fileType}}')" autoplay loop>
                 <source ng-src="/api/media/{{id}}" type="video/webm">
                 Your browser does not support the video tag.
             </video>
-            <div class="image-info" ng-init="setScopeData({{width}}, {{height}}, '{{title}}')">
-                <p class="top-info-line">
-                    Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span>
-                    <span class="amazon-link" ng-if="( {{width}} > 450 || dimensionRatio >= 1) && '{{title}}' != ''" ng-click="goToAmazonLink('{{title}}')">
-                        Search '{{title}}' on Amazon
-                    </span>
-                </p>
-                <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
-                <p>Original dimensions: {{width}}px x {{height}}px</p>
-                <p>Uploaded on: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
-            </div>
+        
         </div>
-    </div>
 
-    <popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>
+        <!-- column to the right of the image -->
+        <div class="image-content-right" layout="column">
+
+
+        </div>
+
+        <popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>
+    
+    </div>
 
 </div>

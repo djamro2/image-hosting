@@ -1,8 +1,8 @@
 
-var app = angular.module('ImageHosting',
-        ['ImageHosting.factories',
-         'ImageHosting.controllers',
-         'ImageHosting.directives',
+var app = angular.module('gifmage',
+        ['gifmage.factories',
+         'gifmage.controllers',
+         'gifmage.directives',
          'ngRoute',
          'ngResource',
          'ngMaterial',

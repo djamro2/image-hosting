@@ -25,14 +25,17 @@ fieldset {
     color: red;
 }
 
+.orangered {
+    color: orangered;
+}
+
 .widerImage {
     min-width: 500px!important;
 }
 
 .simple-navbar {
     border-bottom: 1px solid #DCDCDC;
-    z-index: 11;
-    position: fixed;
+    height: 100%;
 
     .homepage-link {
         text-decoration: none;
@@ -62,72 +65,15 @@ fieldset {
 
     text-align: center;
 
-    .image-container {
+    .content-container {
+        max-width: 960px;
 
-        position: relative;
-        margin: auto;
-        margin-top: 1rem;
-
-        .image-raw {
-
-            display: inline-block;
-            max-width: 960px;
-            margin: auto;
-
-            .image-header {
-                text-align: left;
-
-                .title {
-                    font-size: 2rem;
-                    margin-bottom: .1rem;
-                    margin-left: -.1rem;
-                    margin-top: 1.5rem;
-                }
-
-                .uploaded-on {
-                    font-size: .8rem;
-                    margin-top: .35rem;
-
-                    .uploaded-date {
-                        font-style: italic;
-                    }
-                }
-            }
-
-            img, video {
-                margin-top: .5rem;
-                max-width: 960px;
-                min-width: 400px;
-                border: 1px solid black;
-            }
-
+        .image-content-left {
+            max-width: 720px;
         }
 
-        .image-info {
-
-            text-align: left;
-            margin-top: .75rem;
-            display: inline;
-
-            p {
-                font-size: .8rem;
-                margin: .4rem 0;
-            }
-
-            .top-info-line {
-                text-align: left;
-
-                .amazon-link {
-                    float: right;
-                    color: orange;
-                    font-weight: bold;
-                    cursor: pointer;
-                }
-            }
-
-            .username {
-                font-style: italic;
-            }
+        .image-content-right {
+            max-width: 240px;
         }
     }
 }

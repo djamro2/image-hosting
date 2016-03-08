@@ -3,7 +3,7 @@
 // the purpose of this directive is to create a dynamic
 // and responsive (and reusable) container for the popular images
 
-var directives = directives || angular.module('ImageHosting.directives', []);
+var directives = directives || angular.module('gifmage.directives', []);
 
 directives.directive('popularImages', function(ImageService){
 	return {

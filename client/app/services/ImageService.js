@@ -1,7 +1,7 @@
 /* global angular */
 'use strict';
 
-angular.module('ImageHosting.factories', [])
+angular.module('gifmage.factories', [])
 
 .factory('ImageService', ['$resource', function($resource){
 
