@@ -69,12 +69,37 @@ fieldset {
     font-weight: 700;
     font-family: 'Quicksand', sans-serif;
 
-    .image-title {
-       max-width: 960px;
+    .image-title-bar {
+       width: 960px;
        height: 40px;
        margin: 0 auto;
        margin-top: 20px;
        font-size: 1.25rem;
+       position: relative;
+       overflow: hidden;
+       border-bottom: 2px solid black;
+
+       .title-bar-background {
+            position: absolute;
+            min-width: 1080px;
+            top: -2rem;
+            bottom: -2rem;
+            left: -2rem;
+            right: -2rem;
+
+            /* transparent stuff */
+            background-size: 110% auto;
+            background-position: center;
+            -webkit-filter: blur(10px);
+
+       }
+
+        .title-contents {
+            z-index: 2;
+            height: inherit;
+            width: 960px;
+            color: white;
+        }
 
        p {
             margin: 0;
@@ -120,8 +145,11 @@ fieldset {
 
 .disqus-container {
     margin: 0 auto;
-    margin-top: 7rem;
+    margin-top: 6rem;
+    max-width: 650px;
+    padding-bottom: 5rem;
 }
+
 
 .component-wrapper {
 

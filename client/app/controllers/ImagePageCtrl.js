@@ -79,6 +79,34 @@
 
     };
 
+    /*
+     * Take in an id, and id the parameters fit, set as background url. Otherwise, revert to normal
+     */
+    $scope.setBackground = function(id) {
+
+        if (!id) {
+            return;
+        }
+
+        if ( id.indexOf('png') != -1 || id.indexOf('PNG') != -1 || 
+             id.indexOf('jpeg') != -1 || id.indexOf('JPEG') != -1|| 
+             id.indexOf('jpg') != -1 || id.indexOf('JPG') != -1) {
+
+            var title_bar = document.getElementById('title-bar-background');
+            var title_contents = document.getElementById('title-contents');
+            
+            title_bar.style.backgroundImage = "URL(/api/media/" + id + ")";
+            title_contents.style.backgroundColor = 'rgba(0, 0, 0, .23)';
+
+         } else { /* no transparent background, white background */
+
+            var title_contents = document.getElementById('title-contents');
+            title_contents.style.color = 'black';
+
+         }
+
+    };
+
 	vm.init();
 
 }]);

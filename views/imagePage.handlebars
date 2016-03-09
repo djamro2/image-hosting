@@ -5,11 +5,16 @@
 
     <gifmage-navbar></gifmage-navbar>
 
-    <div class="image-title md-whiteframe-4dp" layout="column" layout-align="center center">
-        <p class="title">{{title}}</p>
+    <div class="image-title-bar md-whiteframe-4dp"
+         ng-init="setBackground('{{id}}')"
+         layout="column" layout-align="center center">
+        <div class="title-bar-background" id="title-bar-background"></div>
+        <div class="title-contents" id="title-contents" layout="row" layout-align="center center">
+            <p class="title">{{title}}</p>
+        </div>
     </div>
 
-    <div class="content-container" 
+    <div class="content-container"
          layout-gt-sm="row" layout="column" 
          ng-init="initializePageStyle({{width}}, {{height}})">
 
@@ -19,7 +24,9 @@
              layout="row" layout-align="center center">
        
             <!-- for regular images -->
-            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}" />
+            <a href="/api/media/{{id}}">
+                <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}" />
+            </a>
 
             <!-- for videos -->
             <video ng-if="isVideo('{{fileType}}')" autoplay loop>
@@ -55,8 +62,8 @@
         <div id="disqus_thread"></div>
         <script>
            var disqus_config = function () {
-           this.page.url = 'gifmage.com'; 
-           this.page.identifier = '4532884'; 
+               //this.page.url = 'gifmage.com/{{id}}'; 
+               this.page.identifier = '{{id}}'; 
            };
             
         (function() { // DON'T EDIT BELOW THIS LINE
