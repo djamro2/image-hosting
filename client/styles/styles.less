@@ -36,46 +36,91 @@ fieldset {
 .simple-navbar {
     border-bottom: 1px solid #DCDCDC;
     height: 100%;
+    padding: 1rem 0;
 
-    .homepage-link {
-        text-decoration: none;
+    .navbar-content-container {
+        width: 960px;
+        margin: 0 auto;
 
-        .header {
-            color: black;
-            font-family: saxmono;
-            color: grey;
-            margin: 0;
-            padding-top: .3rem;
-            padding-bottom: .1rem;
-            text-align: center;
+        .navbar-logo-link {
+            text-decoration: none;
+
+            .navbar-logo {
+                color: grey;
+                font-size: 1.4rem;
+                margin-left: .4rem;
+            }
+
+        }
+
+        .upload-button {
+            margin-top: 0!important;
+            margin-bottom: 0!important;
         }
 
     }
 
-    .bottom-text {
-        width: 100%;
-        text-align: center;
-        margin: auto;
-        font-family: saxmono;
-        padding-bottom: .2rem;
-    }
+
 }
 
 .image-page {
 
     text-align: center;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+
+    .image-title {
+       max-width: 960px;
+       height: 40px;
+       margin: 0 auto;
+       margin-top: 20px;
+       font-size: 1.25rem;
+
+       p {
+            margin: 0;
+            margin-bottom: 1px;
+       }
+    }
 
     .content-container {
         max-width: 960px;
+        margin: 0 auto;
 
         .image-content-left {
-            max-width: 720px;
+            width: 720px;
+            position: relative;
+
+            img, video {
+                max-width: 720px;
+                vertical-align: top;
+            }
+
         }
 
         .image-content-right {
-            max-width: 240px;
+            width: 240px;
+            border-right: 1px solid #F1F1F1;
+            border-bottom: 1px solid #F1F1F1;
+
+            .image-metadata {
+                padding: 1rem;
+                font-size: 1em;
+
+                p {
+                    margin: 8px 0;
+                }
+
+                .dimensions {
+                    font-size: 0.9em;
+                }
+            }
         }
     }
+}
+
+.disqus-container {
+    margin: 0 auto;
+    margin-top: 7rem;
 }
 
 .component-wrapper {

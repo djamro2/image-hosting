@@ -5,34 +5,71 @@
 
     <gifmage-navbar></gifmage-navbar>
 
-    <div class="content-container" layout="row">
-       
-        <!-- contains just the image, image title, and some image info -->
-        <div class="image-content-left">
+    <div class="image-title md-whiteframe-4dp" layout="column" layout-align="center center">
+        <p class="title">{{title}}</p>
+    </div>
 
-            <div class="image-header">
-                <p class="title">{{title}}</p>
-            </div>
+    <div class="content-container" 
+         layout-gt-sm="row" layout="column" 
+         ng-init="initializePageStyle({{width}}, {{height}})">
+
+        <!-- contains just the image, image title, and some image info -->
+        <div class="image-content-left md-whiteframe-12dp" 
+             id="image-container"
+             layout="row" layout-align="center center">
        
-            <!-- for regular images --> 
-            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}"/>
-        
+            <!-- for regular images -->
+            <img ng-if="!isVideo('{{fileType}}')" src="/api/media/{{id}}" />
+
             <!-- for videos -->
             <video ng-if="isVideo('{{fileType}}')" autoplay loop>
                 <source ng-src="/api/media/{{id}}" type="video/webm">
                 Your browser does not support the video tag.
-            </video>
+            </video> 
         
         </div>
 
-        <!-- column to the right of the image -->
+        <!-- column to the right of the image  -->
         <div class="image-content-right" layout="column">
 
+            <div class="image-metadata" layout="column" layout-align="start start">
+
+                <p>By: Anonymous</p>
+                <p>On: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
+                <p>Views: <span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span></p>
+                <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
+                <p class="dimensions">Dimensions: <span>{{width}}px x {{height}}px</span></p>
+
+            </div>
 
         </div>
 
-        <popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>
+        <!--<popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>-->
     
+    </div>
+
+    <!-- disqus comments section -->
+
+    <div class="disqus-container">
+    
+        <div id="disqus_thread"></div>
+        <script>
+           var disqus_config = function () {
+           this.page.url = 'gifmage.com'; 
+           this.page.identifier = '4532884'; 
+           };
+            
+        (function() { // DON'T EDIT BELOW THIS LINE
+             var d = document, s = d.createElement('script');
+
+             s.src = '//gifmage.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
     </div>
 
 </div>

@@ -45,6 +45,22 @@
 		return result;
 	};
 
+    /* 
+     * take in info about the image and change other values to accomodate
+     */
+    $scope.initializePageStyle = function(width, height) {
+
+        // if image is smaller than min-width, set the height to be equal
+        if (width && width < 720) {
+
+            var paddingWidth = ((720 - width) / 2);
+            var image_container = document.getElementById('image-container');
+            image_container.style.height = height + (paddingWidth) + "px";
+
+        }
+
+    };
+
     // return true or false if the path says it is/isn't a video gif
     $scope.isVideo = function(filetype) {
         return (filetype === 'WEBM' || filetype === 'GIFV');
