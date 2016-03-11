@@ -37,6 +37,8 @@ fieldset {
     border-bottom: 1px solid #DCDCDC;
     height: 100%;
     padding: 1rem 0;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
 
     .navbar-content-container {
         width: 960px;
@@ -59,7 +61,6 @@ fieldset {
         }
 
     }
-
 
 }
 
@@ -130,6 +131,7 @@ fieldset {
             .image-metadata {
                 padding: 1rem;
                 font-size: 1em;
+                position: relative;
 
                 p {
                     margin: 8px 0;
@@ -138,6 +140,11 @@ fieldset {
                 .dimensions {
                     font-size: 0.9em;
                 }
+
+                .fb-share-container {
+                    position: absolute;
+                    bottom: 10px;
+                }
             }
         }
     }
@@ -145,11 +152,16 @@ fieldset {
 
 .disqus-container {
     margin: 0 auto;
-    margin-top: 6rem;
+    margin-top: 1rem;
     max-width: 650px;
     padding-bottom: 5rem;
 }
 
+.popular-images-container {
+    padding: 1.5rem 0;
+    max-width: 650px;
+    margin: 0 auto;
+}
 
 .component-wrapper {
 
@@ -253,7 +265,7 @@ fieldset {
         margin-top: 1rem;
         min-width: 175px;
         padding-right: 1rem;
-        padding-bottom: 1rem;
+        padding-bottom: .5rem;
 
         &:first-child {
             padding-left: .5rem;
@@ -286,37 +298,25 @@ fieldset {
 
 .upload-wrapper {
 
-    margin-top: 1rem;
+    margin-top: 3rem;
     max-width: 960px;
-
-    md-toolbar {
-        max-width: 960px;
-    }
 
     md-content {
         width: 960px;
         padding: 0;
     }
 
-    .toolbar-header {
+    .component-content {
 
-        h2 {
+        .upload-text {
+            text-align: center;
             margin: auto;
-            font-size: 1.7rem;
-        }
+            margin-top: 15px;
+            font-family: 'Quicksand', sans-serif;
+        }    
+
     }
 
-    .upload-heading {
-        margin-top: 2rem;
-
-        a {
-            font-family: saxmono;
-        }
-
-        h2 {
-            margin: auto;
-        }
-    }
 }
 
 #policy-column {

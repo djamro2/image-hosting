@@ -29,6 +29,8 @@ fieldset {
   border-bottom: 1px solid #DCDCDC;
   height: 100%;
   padding: 1rem 0;
+  font-weight: 700;
+  font-family: 'Quicksand', sans-serif;
 }
 .simple-navbar .navbar-content-container {
   width: 960px;
@@ -104,6 +106,7 @@ fieldset {
 .image-page .content-container .image-content-right .image-metadata {
   padding: 1rem;
   font-size: 1em;
+  position: relative;
 }
 .image-page .content-container .image-content-right .image-metadata p {
   margin: 8px 0;
@@ -111,11 +114,20 @@ fieldset {
 .image-page .content-container .image-content-right .image-metadata .dimensions {
   font-size: 0.9em;
 }
+.image-page .content-container .image-content-right .image-metadata .fb-share-container {
+  position: absolute;
+  bottom: 10px;
+}
 .disqus-container {
   margin: 0 auto;
-  margin-top: 6rem;
+  margin-top: 1rem;
   max-width: 650px;
   padding-bottom: 5rem;
+}
+.popular-images-container {
+  padding: 1.5rem 0;
+  max-width: 650px;
+  margin: 0 auto;
 }
 .component-wrapper {
   width: 50%;
@@ -190,7 +202,7 @@ fieldset {
   margin-top: 1rem;
   min-width: 175px;
   padding-right: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
 }
 #popular-wrapper .image:first-child {
   padding-left: .5rem;
@@ -213,28 +225,18 @@ fieldset {
   font-size: .7rem;
 }
 .upload-wrapper {
-  margin-top: 1rem;
-  max-width: 960px;
-}
-.upload-wrapper md-toolbar {
+  margin-top: 3rem;
   max-width: 960px;
 }
 .upload-wrapper md-content {
   width: 960px;
   padding: 0;
 }
-.upload-wrapper .toolbar-header h2 {
+.upload-wrapper .component-content .upload-text {
+  text-align: center;
   margin: auto;
-  font-size: 1.7rem;
-}
-.upload-wrapper .upload-heading {
-  margin-top: 2rem;
-}
-.upload-wrapper .upload-heading a {
-  font-family: saxmono;
-}
-.upload-wrapper .upload-heading h2 {
-  margin: auto;
+  margin-top: 15px;
+  font-family: 'Quicksand', sans-serif;
 }
 #policy-column {
   padding: 2rem 1rem;

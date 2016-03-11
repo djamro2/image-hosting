@@ -1,4 +1,15 @@
 
+/*
+ * Left to do before posting again:
+ *
+ * Improve the right-col (more/better content, make it look more natural and fit in)
+ * Clean up layout and sizing for mobile on image page
+ * Fix up admin dashboard
+ * Facebook share and twitter
+ *
+ */
+
+
 var express    = require('express');
 var handlebars = require('express-handlebars');
 var bodyParser = require('body-parser');

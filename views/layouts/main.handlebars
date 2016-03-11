@@ -3,6 +3,11 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta property="og:url"           content="http://www.gifmage.com/{{id}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{title}}" />
+    <meta property="og:description"   content="Gifmage image hosting of {{title}}, has id of {{id}}" />
+    <meta property="og:image"         content="http://www.gifmage.com/api/media/{{id}}" />
 
     <link rel="shortcut icon" href="/styles/favicon.ico" />
 
@@ -40,17 +45,36 @@
 </head>
 <body>
 
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '941450622629417',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- disqus comment count -->
+    <script id="dsq-count-scr" src="//gifmage.disqus.com/count.js" async></script>
+    
     <div id="container-all">
 
         <!-- controller declaration should be inside tempalte -->
         {{{body}}}
 
         <div class="footer">
-            @2016 <a href="/">gifmage</a>
+            @2016 <a href="/">gifmage</a>, email: contact@gifmage.com
         </div>
 
     </div>
 
-    <script id="dsq-count-scr" src="//gifmage.disqus.com/count.js" async></script>
 </body>
 </html>

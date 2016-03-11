@@ -39,7 +39,7 @@
         <!-- column to the right of the image  -->
         <div class="image-content-right" layout="column">
 
-            <div class="image-metadata" layout="column" layout-align="start start">
+            <div flex class="image-metadata" layout="column" layout-align="start start">
 
                 <p>By: Anonymous</p>
                 <p>On: <span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY hh:mma')"></span></p>
@@ -47,12 +47,27 @@
                 <p>Size: <span ng-bind="convertSize({{size}})"></span></p>
                 <p class="dimensions">Dimensions: <span>{{width}}px x {{height}}px</span></p>
 
+                <!-- Facebook like button code -->
+                <div class="fb-share-container">
+                    <div 
+                        class="fb-like" 
+                        data-layout="button_count" 
+                        data-share="true"
+                        data-width="200" 
+                        data-show-faces="false" 
+                        data-href="http://www.gifmage.com/{{id}}" 
+                        data-action="like"> 
+                    </div>
+                </div>
+
             </div>
 
         </div>
-
-        <!--<popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>-->
     
+    </div>
+    
+    <div class="popular-images-container">
+        <popular-images imageheight="{{height}}" imagewidth="{{width}}"></popular-images>
     </div>
 
     <!-- disqus comments section -->
