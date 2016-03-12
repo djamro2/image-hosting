@@ -78,7 +78,7 @@ var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated())
         return next();
     res.redirect('/');
-}
+};
 
 app.post('/login', passport.authenticate('login', {
     successRedirect: '/admin/dashboard',
@@ -96,7 +96,7 @@ app.get('/admin/dashboard', isAuthenticated, function(req, res){
     Image.find({})
          .sort('-date')
          .exec(function(err, images){
-             res.render('adminDashboard', {images: images, title: 'Gifmage Admin'});
+             res.render('adminDashboard', {images: images, title: 'Gifmage Admin', layout: false});
     });
 });
 

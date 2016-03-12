@@ -1,75 +1,201 @@
 
-<div id="scoped-content" class="admin-dashboard">
+<!DOCTYPE html>
+<html>
 
-    <style type="text/css" scoped>
+<head>
+  
+    <!-- normal head tags -->
+    <title>{{title}}</title>
 
-    p {
-        font-size: .75rem;
-        line-height: .75rem;
-        margin-top: 3px;
-        margin-bottom: 3px;
-    }
+    <!-- style -->
+    <style type="text/css">
 
-    .admin-image-container {
-        text-align: center;
-        position: relative;
-        height: 175px;
-        border-right: 1px solid black;
-    }
+        p {
+            font-size: .75rem;
+            line-height: .75rem;
+            margin-top: 3px;
+            margin-bottom: 3px;
+        }
 
-    .admin-image-preview {
-        height: 100%;
-        max-width: 300px;
-    }
+        .admin-dashboard {
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-    .admin-image-info {
-        padding-left: 1rem;
-    }
+        .admin-dashboard-header {
+            text-align: center;
+            padding: 1.5rem;
+        }
 
-    .image-row {
-        height: 175px;
-        padding: 20px 0;
-        border-bottom: 1px solid black;
-    }
+        .admin-image-container {
+            text-align: center;
+            position: relative;
+            height: 175px;
+            border-right: 1px solid black;
+            display: inline-block;
+            width: 400px;
+        }
 
-    .image-button1 {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+        .admin-image-preview {
+            height: 100%;
+            max-width: 300px;
+        }
 
-    .image-button2 {
-        position: absolute;
-        top: 30px;
-        right: 0;
-    }
+        .admin-image-info {
+            display: inline-block;
+            max-width: 560px;
+            padding-left: 1rem;
+            position: relative;
+            top: -40px;
+        }
+
+        .image-row {
+            position: relative;
+            height: 175px;
+            padding: 20px 0;
+            border-bottom: 1px solid black;
+        }
+
+        .image-button1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .image-button2 {
+            position: absolute;
+            top: 30px;
+            right: 0;
+        }
 
     </style>
 
-    {{#each images}}
+    <!-- javascript dependencies -->
+    <script type="text/javascript" src="/scripts/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 
-        <div class="image-row" layout="row" layout-align="start start">
+    <!-- custom service -->
+    <script>
+        angular.module('gifmage.factories', [])
+        .factory('ImageService', ['$resource', function($resource){
 
-            <div class="admin-image-container" flex="35">
-                <a href="/{{id}}">
-                    <img class="admin-image-preview" src="/api/media/{{id}}" alt="{{title}}" />
-                </a>
-                <button type="button" class="image-button1">Flag as NSFW</button>
-                <button type="button" ng-click="removeContent('{{id}}')" class="image-button2">Remove</button>
-            </div>
+            var Image =  $resource('/api/image/:id', {id: '@Id'}, {
+                update: {method: 'PUT'},
+                getRecentImages: {
+                    method: 'GET',
+                    url: '/api/recentImages',
+                    isArray: true
+                },
+                getPopularImages: {
+                    method: 'GET',
+                    url: '/api/popularImages',
+                    isArray: true
+                },
+                removeContent: {
+                    method: 'DELETE',
+                    url: '/api/delete/:id', 
+                    params: {id: '@Id'}
+                }
+            });
 
-            <div class="admin-image-info" layout="column" flex="65" layout-align="space-between start" >
-                <p>Title: {{title}}</p>
-                <p>ViewsWebsite: {{viewsWebsite}}</p>
-                <p>ViewsEmbeded: {{viewsEmbeded}}</p>
-                <p>Is Nsfw? {{isNsfw}}</p>
-                <p>Date posted: {{date}}</p>
-                <p>Dimensions: {{width}}px x {{height}}px </p>
-                <p>Size: {{size}}</p>
-            </div>
+            return Image;
+
+        }]);
+
+    </script>
+   
+    <!-- custom controller -->
+    <script>
+
+        angular.module('gifmage.controllers', [])
+
+        .controller('AdminController', ['$scope', '$timeout', '$location', 'ImageService', '$window',
+            function($scope, $timeout, $location, ImageService, $window){
+
+            var vm = this;
+
+            vm.init = function() {
+                /* stuff to do on init */
+            };
+
+            $scope.removeContent = function(id) {
+                var params = {id: id};
+                ImageService.removeContent(params, function(result) {
+
+                    if (result.ok === 1) {
+                        $window.location.href = '/admin/dashboard';
+                    }
+
+                });
+            };
+
+            vm.init();
+
+        }]);
+
+    </script>
+
+    <!-- custom angular app -->
+    <script>
+        
+        var app = angular.module('gifmage.adminDashboard',
+                ['gifmage.controllers',
+                 'gifmage.factories',
+                 'ngRoute',
+                 'ngResource',
+                 'ngMaterial']);
+
+    </script>
+    
+</head>
+
+<body ng-app="gifmage.adminDashboard">
+
+    <div class="admin-dashboard" ng-controller="AdminController">
+
+        <div class="admin-dashboard-header">
+
+            <h2>Gifmage - Admin Dashboard</h2>
 
         </div>
 
-    {{/each}}
+        {{#each images}}
 
-</div>
+            <div class="image-row">
+
+                <div class="admin-image-container">
+                    <a href="/{{id}}">
+                        <img class="admin-image-preview" src="/api/media/{{id}}" alt="{{title}}" />
+                    </a>
+                    <button type="button" class="image-button1">Flag as NSFW</button>
+                    <button type="button" ng-click="removeContent('{{id}}')" class="image-button2">Remove</button>
+                </div>
+
+                <div class="admin-image-info">
+                    <p>Title: {{title}}</p>
+                    <p>ViewsWebsite: {{viewsWebsite}}</p>
+                    <p>ViewsEmbeded: {{viewsEmbeded}}</p>
+                    <p>Is Nsfw? {{isNsfw}}</p>
+                    <p>Date posted: {{date}}</p>
+                    <p>Dimensions: {{width}}px x {{height}}px </p>
+                    <p>Size: {{size}}</p>
+                </div>
+
+            </div>
+
+        {{/each}}
+
+    </div>
+
+</body>
+
+</html>
+
+

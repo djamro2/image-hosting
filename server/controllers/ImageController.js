@@ -27,6 +27,31 @@ module.exports.setApp = function(app) {
     main.app = app;
 };
 
+/*
+ * Delete a file with the given id. Already authenticated at this point
+ */
+module.exports.deleteFile = function(req, res) {
+
+    var imageId = req.params.id;
+   
+    // first remove actual image data, and then metadata
+    gfs.remove({ filename: imageId}, function(error) {
+
+        if (error) {
+            res.send("Error: " + error);
+            return;
+        }
+    
+        Image.find({id: imageId})
+             .remove()
+             .exec(function(err, result){
+                res.send(result);
+        });
+
+    });
+
+};
+
 // take a file and save to db, and save schema info as well (/uploadFile)
 module.exports.uploadFile = function(req, res, next){
 

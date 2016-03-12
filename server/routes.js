@@ -1,6 +1,13 @@
 
+
 var HomeController  = require('./controllers/HomeController');
 var ImageController = require('./controllers/ImageController');
+
+var isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+};
 
 module.exports = function(app){
 
@@ -24,5 +31,8 @@ module.exports = function(app){
 
     // upload the image file and some data with it
     app.post('/uploadFile', ImageController.uploadFile);
+
+    // delete content with that id
+    app.delete('/api/delete/:id', isAuthenticated, ImageController.deleteFile);
 
 };
