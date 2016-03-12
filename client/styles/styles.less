@@ -74,11 +74,11 @@ fieldset {
        width: 960px;
        height: 40px;
        margin: 0 auto;
-       margin-top: 20px;
+       margin-top: 1.5rem;
        font-size: 1.25rem;
        position: relative;
        overflow: hidden;
-       border-bottom: 2px solid black;
+       border-bottom: 1px solid black;
 
        .title-bar-background {
             position: absolute;
@@ -111,6 +111,7 @@ fieldset {
     .content-container {
         max-width: 960px;
         margin: 0 auto;
+        margin-top: 1.5rem;
 
         .image-content-left {
             width: 720px;
@@ -127,23 +128,35 @@ fieldset {
             width: 240px;
             border-right: 1px solid #F1F1F1;
             border-bottom: 1px solid #F1F1F1;
+            border-top: 1px solid #F1F1F1;
 
             .image-metadata {
                 padding: 1rem;
-                font-size: 1em;
+                padding-top: 20px;
+                font-size: .9em;
                 position: relative;
 
                 p {
                     margin: 8px 0;
+                    font-weight: 400;
+
+                    .info-name {
+                        font-family: sans-serif;
+                        font-weight: 600;
+                        font-size: 1.1em;
+                    }
                 }
 
                 .dimensions {
-                    font-size: 0.9em;
+                    font-size: 0.85em;
                 }
 
-                .fb-share-container {
-                    position: absolute;
-                    bottom: 10px;
+                .share-container {
+                    margin-top: 25px;
+
+                    .fb-like {
+                        margin-bottom: .9em;
+                    }
                 }
             }
         }
