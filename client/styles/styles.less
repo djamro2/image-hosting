@@ -78,7 +78,7 @@ fieldset {
        font-size: 1.25rem;
        position: relative;
        overflow: hidden;
-       border-bottom: 1px solid black;
+       border-bottom: 1px solid grey;
 
        .title-bar-background {
             position: absolute;
@@ -166,13 +166,13 @@ fieldset {
 .disqus-container {
     margin: 0 auto;
     margin-top: 1rem;
-    max-width: 650px;
+    max-width: 720px;
     padding-bottom: 5rem;
 }
 
 .popular-images-container {
     padding: 1.5rem 0;
-    max-width: 650px;
+    max-width: 720px;
     margin: 0 auto;
 }
 
@@ -361,33 +361,61 @@ fieldset {
     }
 }
 
+/* anything smaller than 960px */
 @media (max-width: 960px) {
-    .image-container {
 
-        max-width: 100%;
-        width: 100%;
+    .simple-navbar {
 
-        img {
-            margin-top: .5rem;
-            max-width: 100%;
-            width: 100%;
-        }
+        .navbar-content-container {
+            max-width: 720px!important; /*width of image */
 
-        .title {
-            //font-size: 4rem;
-        }
-
-        .uploaded-on {
-            //font-size: 1.6rem;
-        }
-
-        .image-info {
-
-            p {
-                //font-size: 1.6rem;
-            }
         }
     }
+
+    .image-title-bar {
+        width: 720px!important; /* width of image */
+    }
+
+    .content-container {
+
+        .image-content-left {
+            margin: auto;
+        }
+
+        .image-content-right {
+            width: 720px!important;
+            margin: auto;
+            border-left: 1px solid #F1F1F1;
+
+            .image-metadata {
+    
+                p {
+                    margin: 6px 0!important;
+                }
+                    
+            }
+        }
+
+    }
+
+}
+
+/* anything smaller than 720px */
+@media (max-width: 720px) {
+
+    .content-container {
+
+        .image-content-left {
+
+            img {
+                width: 100%!important;
+            }
+
+        }
+
+
+    }
+
 }
 
 @font-face {
