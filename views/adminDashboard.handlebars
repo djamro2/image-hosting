@@ -20,6 +20,7 @@
         .admin-dashboard {
             max-width: 960px;
             margin: 0 auto;
+            padding-bottom: 5rem;
         }
 
         .admin-dashboard-header {
@@ -68,7 +69,21 @@
             right: 0;
         }
 
+        .changePage {
+            cursor: pointer;
+            padding-right: 2rem;
+            font-weight: 700;
+            color: blue;
+        }
+
+        .select-perpage-text {
+            padding-right: 1rem;
+        }
+
     </style>
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
 
     <!-- javascript dependencies -->
     <script type="text/javascript" src="/scripts/jquery-2.2.0.min.js"></script>
@@ -130,10 +145,19 @@
                 ImageService.removeContent(params, function(result) {
 
                     if (result.ok === 1) {
-                        $window.location.href = '/admin/dashboard';
+                        $window.location.href = '/admin/dashboard/' + page + '/' + perpage;
                     }
 
                 });
+            };
+
+            $scope.setPagination = function(page, perpage) {
+                $scope.current_page = Number(page);
+                $scope.amt_per_page = perpage;
+            };
+
+            $scope.goToPage = function(page, perpage) {
+                $window.location.href = '/admin/dashboard/' + page + '/' + perpage;
             };
 
             vm.init();
@@ -156,13 +180,33 @@
     
 </head>
 
-<body ng-app="gifmage.adminDashboard">
+<body ng-app="gifmage.adminDashboard" ng-cloak>
 
     <div class="admin-dashboard" ng-controller="AdminController">
 
         <div class="admin-dashboard-header">
 
             <h2>Gifmage - Admin Dashboard</h2>
+
+        </div>
+
+        <div class="admin-dashboard-pagination" 
+             layout="row"
+             ng-init="setPagination('{{page}}', '{{perPage}}')">
+
+            <span class="changePage" ng-click="goToPage( (current_page - 1), amt_per_page)">Previous Page</span>
+            <span class="changePage" ng-click="goToPage( (current_page + 1), amt_per_page)">Next Page</span>
+
+            <span flex></span>
+
+            <span class="select-perpage-text">Images Per Page: </span>
+            <select ng-model="amt_per_page" ng-change="goToPage(current_page, amt_per_page)">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select> 
 
         </div>
 

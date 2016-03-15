@@ -81,7 +81,7 @@ var isAuthenticated = function (req, res, next) {
 };
 
 app.post('/login', passport.authenticate('login', {
-    successRedirect: '/admin/dashboard',
+    successRedirect: '/admin/dashboard/1/10',
     failureRedirect: '/',
     failureFlash : true
 }));
@@ -90,14 +90,30 @@ app.get('/admin/login', function(req, res){
     res.sendFile(__dirname + '/client/views/adminLogin.html');
 });
 
-app.get('/admin/dashboard', isAuthenticated, function(req, res){
+app.get('/admin/dashboard/:page/:perPage', isAuthenticated, function(req, res){
+   
+    // set default mins 
+    var page    = Math.max(1, req.params.page);
+    var perPage = Math.max(1, req.params.perPage);
 
-    // get all the images!
+    // get the correct images, depending on page and perpage
     Image.find({})
          .sort('-date')
+         .limit(perPage)
+         .skip(perPage * (page - 1))
          .exec(function(err, images){
-             res.render('adminDashboard', {images: images, title: 'Gifmage Admin', layout: false});
+
+             var params = {
+                images: images,
+                title: 'Gifmage Admin',
+                layout: false,
+                perPage: perPage,
+                page: page
+             };
+
+             res.render('adminDashboard', params);
     });
+
 });
 
 

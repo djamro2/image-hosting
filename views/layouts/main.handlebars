@@ -31,6 +31,10 @@
     <script type="text/javascript" src="/scripts/ng-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="/scripts/ng-file-upload.min.js"></script>
     <script type="text/javascript" src="/scripts/moment.min.js"></script>
+    
+    <!-- chart.js stuff -->
+    <script type="text/javascript" src="/scripts/Chart.min.js"></script>
+    <script type="text/javascript" src="/scripts/24hrsChart.js"></script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 
@@ -51,11 +55,27 @@
       ga('send', 'pageview');
 
     </script>
-
+    
     <title>{{title}}</title>
 </head>
 <body>
 
+    
+    <!-- disqus comment count -->
+    <script id="dsq-count-scr" src="//gifmage.disqus.com/count.js" async></script>
+    
+    <div id="container-all">
+
+        <!-- controller declaration should be inside tempalte -->
+        {{{body}}}
+
+        <div class="footer">
+            @2016 <a href="/">gifmage</a>, email: contact@gifmage.com
+        </div>
+
+    </div>
+
+    <!--
     <script>
         window.fbAsyncInit = function() {
             FB.init({
@@ -72,20 +92,10 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    -->
 
-    <!-- disqus comment count -->
-    <script id="dsq-count-scr" src="//gifmage.disqus.com/count.js" async></script>
+    <!-- facebook like button -->
+    <script async src="//static.addtoany.com/menu/page.js"></script> 
     
-    <div id="container-all">
-
-        <!-- controller declaration should be inside tempalte -->
-        {{{body}}}
-
-        <div class="footer">
-            @2016 <a href="/">gifmage</a>, email: contact@gifmage.com
-        </div>
-
-    </div>
-
 </body>
 </html>

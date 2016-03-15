@@ -48,16 +48,30 @@
                 <p class="dimensions"><span class="info-name">Dimensions: </span><span>{{width}}px x {{height}}px</span></p>
 
                 <!-- like/share button code -->
-                <div class="share-container" layout="column" layout-align="none start">
-                    <fb:like
-                        class="fb-like" 
-                        data-show-faces="false" 
-                        data-width="200"
-                        data-href="http://www.gifmage.com/{{id}}" 
-                        data-action="like"> 
-                    </fb:like>
-                    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="share-container">
+                   
+                    <div class="share-fb-container"> 
+                        <div class="a2a_kit">
+                                <a class="a2a_button_facebook_like" 
+                                   data-action="like" 
+                                   data-href="http://www.gifmage.com/{{id}}" 
+                                   data-layout="button_count" 
+                                   data-width="55">
+                               </a>
+                        </div>
+                    </div>
+
+                    <div class="share-twitter-container">
+                        <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+
+                </div>
+
+                <!-- last 24hrs graph -->
+                <div class="chart-container" style="text-align: center; width: 100%;">
+                    <p class="chart-header" style="margin-top: 1.5rem;">Views last 12 hours</p>
+                    <canvas id="24hrsChart" width="180" height="180"></canvas>
                 </div>
 
             </div>

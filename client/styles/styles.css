@@ -124,10 +124,16 @@ fieldset {
   font-size: 0.85em;
 }
 .image-page .content-container .image-content-right .image-metadata .share-container {
-  margin-top: 25px;
+  margin-top: 18px;
 }
-.image-page .content-container .image-content-right .image-metadata .share-container .fb-like {
-  margin-bottom: .9em;
+.image-page .content-container .image-content-right .image-metadata .share-container .share-fb-container {
+  float: left;
+  display: inline-block;
+  width: 80px;
+}
+.image-page .content-container .image-content-right .image-metadata .share-container .share-twitter-container {
+  display: inline-block;
+  width: 80px;
 }
 .disqus-container {
   margin: 0 auto;
