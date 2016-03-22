@@ -35,9 +35,10 @@ directives.directive('recentViewsChart', ['ImageService', function(ImageService)
 
                 // create the 'labels' data set
                 var labels = [];
+                var timezoneOffset = 1; // /* for eastern time only right now */
                 for (var i = 0; i < hourIndexes.length; i++) {
 
-                    var hour = String((hourIndexes[i]) % 12);
+                    var hour = String( ((hourIndexes[i]) % 12) + timezoneOffset);
 
                     if (hour === "0") {
                         hour = "12";
