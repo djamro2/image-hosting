@@ -44,8 +44,8 @@
                 <p><span class="info-name">By: </span>Anonymous</p>
                 <p><span class="info-name">On: </span><span ng-bind="formatDate('{{date}}', 'MM/DD/YYYY h:mma')"></span></p>
                 <p><span class="info-name">Views: </span><span ng-bind="addViews({{viewsWebsite}}, {{viewsEmbeded}})"></span></p>
-                <p><span class="info-name">Size: </span><span ng-bind="convertSize({{size}})"></span></p>
-                <p class="dimensions"><span class="info-name">Dimensions: </span><span>{{width}}px x {{height}}px</span></p>
+                <!--<p><span class="info-name">Size: </span><span ng-bind="convertSize({{size}})"></span></p>-->
+                <!--<p class="dimensions"><span class="info-name">Dimensions: </span><span>{{width}}px x {{height}}px</span></p>-->
 
                 <!-- like/share button code -->
                 <div class="share-container">
@@ -69,9 +69,14 @@
                 </div>
 
                 <!-- last 24hrs graph -->
-                <div class="chart-container" style="text-align: center; width: 100%;">
-                    <p class="chart-header" style="margin-top: 1.5rem;">Views last 12 hours</p>
-                    <canvas id="24hrsChart" width="180" height="180"></canvas>
+                <div class="chart-container" ng-show="showChart">
+                    <p class="chart-header">Views last 12 hours</p>
+                    <canvas id="12hrsChart"
+                            width="180"
+                            height="180"
+                            imageid="{{id}}"
+                            show-chart="showChart"
+                            recent-views-chart></canvas>
                 </div>
 
             </div>

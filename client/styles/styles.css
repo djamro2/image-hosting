@@ -105,9 +105,16 @@ fieldset {
   border-bottom: 1px solid #F1F1F1;
   border-top: 1px solid #F1F1F1;
 }
+.image-page .content-container .image-content-right .chart-container {
+  text-align: center;
+  width: 100%;
+}
+.image-page .content-container .image-content-right .chart-container .chart-header {
+  margin-top: .8rem;
+}
 .image-page .content-container .image-content-right .image-metadata {
   padding: 1rem;
-  padding-top: 20px;
+  padding-top: 5px;
   font-size: .9em;
   position: relative;
 }
@@ -124,7 +131,7 @@ fieldset {
   font-size: 0.85em;
 }
 .image-page .content-container .image-content-right .image-metadata .share-container {
-  margin-top: 18px;
+  margin-top: 8px;
 }
 .image-page .content-container .image-content-right .image-metadata .share-container .share-fb-container {
   float: left;
@@ -298,6 +305,9 @@ fieldset {
   }
   .content-container .image-content-right .image-metadata p {
     margin: 6px 0!important;
+  }
+  .content-container .image-content-right .chart-container {
+    text-align: left!important;
   }
 }
 /* anything smaller than 720px */

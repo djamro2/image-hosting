@@ -8,6 +8,8 @@
 
 	var vm = this;
 
+    $scope.showChart = false;
+
 	vm.init = function(){
 		// nothing right now
 	};

@@ -2,6 +2,7 @@
 <html lang="en" ng-app="gifmage">
 <head>
 
+    <!-- meta data -->
     <meta charset="UTF-8">
     <meta property="og:url"           content="http://www.gifmage.com/{{id}}" />
     <meta property="og:type"          content="website" />
@@ -9,8 +10,8 @@
     <meta property="og:description"   content="Gifmage image hosting of {{title}}, has id of {{id}}" />
     <meta property="og:image"         content="http://www.gifmage.com/api/media/{{id}}" />
 
+    <!-- styles -->
     <link rel="shortcut icon" href="/styles/favicon.ico" />
-
     <link rel="stylesheet" href="/styles/styles.css" />
     <link rel='stylesheet' href='/styles/perfect-scrollbar.min.css' />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc5/angular-material.min.css">
@@ -21,6 +22,7 @@
     <script type="text/javascript" src="/scripts/perfect-scrollbar.jquery.min.js"></script>
     <script type="text/javascript" src="/scripts/perfect-scrollbar.min.js"></script>
 
+    <!-- angular dependencies -->
     <script type="text/javascript" src="/scripts/angular.min.js"></script>
     <script type="text/javascript" src="/scripts/angular-resource.min.js"></script>
     <script type="text/javascript" src="/scripts/angular-route.min.js"></script>
@@ -28,23 +30,25 @@
     <script type="text/javascript" src="/scripts/angular-aria.min.js"></script>
     <script type="text/javascript" src="/scripts/angular-animate.min.js"></script>
 
+    <!-- extra dependencies -->
     <script type="text/javascript" src="/scripts/ng-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="/scripts/ng-file-upload.min.js"></script>
     <script type="text/javascript" src="/scripts/moment.min.js"></script>
-    
-    <!-- chart.js stuff -->
-    <script type="text/javascript" src="/scripts/Chart.min.js"></script>
-    <script type="text/javascript" src="/scripts/24hrsChart.js"></script>
-
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc7/angular-material.min.js"></script>
 
+    <!-- chart.js stuff -->
+    <script type="text/javascript" src="/scripts/Chart.min.js"></script>
+
+    <!-- angular code -->
     <script type="text/javascript" src="/app/services/ImageService.js"></script>
     <script type="text/javascript" src="/app/controllers/ImagePageCtrl.js"></script>
     <script type="text/javascript" src="/app/directives/buttonAsInput.js"></script>
     <script type="text/javascript" src="/app/directives/gifmageNavbar.js"></script>
+    <script type="text/javascript" src="/app/directives/12hrsChart.js"></script>
     <script type="text/javascript" src="/app/directives/popularImages.js"></script>
     <script type="text/javascript" src="/app/app.js"></script>
-    
+
+    <!-- google analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -53,10 +57,10 @@
 
       ga('create', 'UA-68428821-3', 'auto');
       ga('send', 'pageview');
-
     </script>
     
     <title>{{title}}</title>
+
 </head>
 <body>
 
@@ -74,25 +78,6 @@
         </div>
 
     </div>
-
-    <!--
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '941450622629417',
-                xfbml      : true,
-                version    : 'v2.5'
-            });
-        };
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    -->
 
     <!-- facebook like button -->
     <script async src="//static.addtoany.com/menu/page.js"></script> 

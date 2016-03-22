@@ -16,6 +16,12 @@ angular.module('gifmage.factories', [])
 			method: 'GET',
 			url: '/api/popularImages',
 			isArray: true
+		},
+		getRecentViewsLog: {
+			method: 'GET',
+			url: '/api/getRecentViewsLog/:id',
+			params: {id: '@Id'},
+			isArray: false
 		}
 	});
 

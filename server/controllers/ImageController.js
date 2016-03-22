@@ -87,8 +87,6 @@ module.exports.uploadFile = function(req, res, next){
 
             main.getMediaInfo(fields, contentType, tmpPath, function(info){
 
-                //TODO: change names (like model) here and put more logic in getMediaInfo
-
                 var mediaObject = {
                     id: id,
                     title: ((fields.title && fields.title[0]) || ""),
@@ -102,11 +100,16 @@ module.exports.uploadFile = function(req, res, next){
                 var image = new Image(mediaObject);
 
                 image.save(function(error, result){
+
+                    // create a new recent log for this image
+                    utils.createNewRecentLog(result.id);
+
+                    // send the result
                     if (!error)
-                        res.send(result); //TODO: do I need this?
-                    else {
+                        res.send(result);
+                    else
                         res.status(500).send('Error uploading media object');
-                    }
+
                 });
 
                 console.log(file.filename + ' Written To DB');

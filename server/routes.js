@@ -1,8 +1,12 @@
 
 
-var HomeController  = require('./controllers/HomeController');
-var ImageController = require('./controllers/ImageController');
+var HomeController           = require('./controllers/HomeController');
+var ImageController          = require('./controllers/ImageController');
+var RecentViewsLogController = require('./controllers/RecentViewsLogController')
 
+/*
+ * Check to see if the current user has an authentication cookie
+ */
 var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated())
         return next();
@@ -28,6 +32,9 @@ module.exports = function(app){
 
     // get the 4 most popular images
     app.get('/api/popularImages', ImageController.getPopularImages);
+
+    // every image has a corresponding recent views log, return that single one
+    app.get('/api/getRecentViewsLog/:id', RecentViewsLogController.getRecentLog);
 
     // upload the image file and some data with it
     app.post('/uploadFile', ImageController.uploadFile);
