@@ -15,53 +15,21 @@ directives.directive('recentViewsChart', ['ImageService', function(ImageService)
         link: function(scope, element, attrs) {
 
             // make an API call to get the corresponding log for this image
-            ImageService.getRecentViewsLog({id: attrs.imageid}, function(recentLog) {
+            ImageService.getRecentViewsLog({id: attrs.imageid}, function(result) {
 
                 // return if the call did not execute correctly
-                if (!recentLog.id) {
+                if (!result.data) {
                     console.log("This image is not new enough for 'last 12 hrs' views");
                     return;
                 }
 
-                // have data, can enable showing the chart
+                // can enable showing the chart
                 scope.showChart = true;
 
-                // create the corresponding hour indexes to show in the graph
-                var hourIndexes = [];
-                var currentHour = Number(moment(new Date()).format("H"));
-                for (var i = 0; i < 12; i++) {
-                    hourIndexes.unshift((currentHour - i) % 24);
-                }
-
-                // create the 'labels' data set
-                var labels = [];
-                var timezoneOffset = 1; // /* for eastern time only right now */
-                for (var i = 0; i < hourIndexes.length; i++) {
-
-                    var hour = String( ((hourIndexes[i]) % 12) + timezoneOffset);
-
-                    if (hour === "0") {
-                        hour = "12";
-                    }
-
-                    if (hourIndexes[i] > 11) {
-                        hour += "pm";
-                    } else {
-                        hour += "am";
-                    }
-
-                    labels.push(hour);
-                }
-
-                // build the correct data based off of hourIndexes
-                var data = [];
-                for (var i = 0; i < hourIndexes.length; i++) {
-                    data.push( recentLog.views[ hourIndexes[i] ] );
-                }
-
+                // pass data received from the call and create the chart
                 var data = {
 
-                    labels: labels,
+                    labels: result.labels,
 
                     datasets: [
                         {
@@ -72,12 +40,13 @@ directives.directive('recentViewsChart', ['ImageService', function(ImageService)
                             pointStrokeColor: "#fff",
                             pointHighlightFill: "#fff",
                             pointHighlightStroke: "rgba(220,220,220,1)",
-                            data: data
+                            data: result.data
                         }
                     ]
 
                 };
 
+                // find the element and create a new line chart. Pass in options here
                 var ctx = document.getElementById("12hrsChart").getContext("2d");
                 var chart = new Chart(ctx).Line(data);
                 
