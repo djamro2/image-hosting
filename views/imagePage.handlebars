@@ -80,6 +80,26 @@
                     <p class="eastern-time-disclaimer">* In Eastern Time</p>
                 </div>
 
+                <!-- advertisement (if enabled) -->
+                <div ng-if="'{{isNsfw}}' !== 'true' && '{{adAllowed}}' === 'true'" class="ad-container">
+
+                    <div id="adBox">
+
+                        <script type="text/javascript">
+                            ( function() {
+                                if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
+                                var unit = {"calltype":"async[2]","publisher":"gifmage","width":190,"height":70,"sid":"Chitika Default"};
+                                var placement_id = window.CHITIKA.units.length;
+                                window.CHITIKA.units.push(unit);
+                                document.getElementById("adBox").innerHTML = '<div id="chitikaAdBlock-' + placement_id + '"></div>';
+                            }());
+                        </script>
+                        <script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>

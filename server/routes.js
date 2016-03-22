@@ -36,6 +36,9 @@ module.exports = function(app){
     // every image has a corresponding recent views log, return that single one
     app.get('/api/getRecentViewsLog/:id', RecentViewsLogController.getRecentLog);
 
+    // set the current state of adAllowed to the opposite of the current state
+    app.post('/api/allowAd/:id', ImageController.allowAd);
+
     // upload the image file and some data with it
     app.post('/uploadFile', ImageController.uploadFile);
 

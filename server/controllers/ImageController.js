@@ -27,6 +27,25 @@ module.exports.setApp = function(app) {
     main.app = app;
 };
 
+module.exports.allowAd = function(req, res) {
+
+    var id = req.params.id;
+
+    Image.findOne({id: id}, function(error, image) {
+
+        if (error || !image) {
+            res.send("Could not find that image");
+        }
+
+        image.adAllowed = !image.adAllowed;
+        image.save(function(error, result) {
+            res.send(result);
+        });
+
+    });
+
+};
+
 /*
  * Delete a file with the given id. Already authenticated at this point
  */
@@ -91,6 +110,7 @@ module.exports.uploadFile = function(req, res, next){
                     id: id,
                     title: ((fields.title && fields.title[0]) || ""),
                     isNsfw: ((fields.nsfw && fields.nsfw[0]) || false),
+                    adAllowed: false,
                     size: files.file[0].size,    //in bytes
                     width: info.width,
                     height: info.height,

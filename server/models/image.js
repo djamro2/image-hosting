@@ -5,6 +5,7 @@ module.exports = mongoose.model('Image', {
 	id: String,
     title: String,
 	isNsfw: Boolean,
+	adAllowed: Boolean,
 	size: Number,
 	fileType: String,
 	width: {type: Number, default: 0},

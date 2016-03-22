@@ -69,6 +69,12 @@
             right: 0;
         }
 
+        .image-button3 {
+            position: absolute;
+            top: 60px;
+            right: 0;
+        }
+
         .changePage {
             cursor: pointer;
             padding-right: 2rem;
@@ -117,6 +123,11 @@
                     method: 'DELETE',
                     url: '/api/delete/:id', 
                     params: {id: '@Id'}
+                },
+                allowAd: {
+                    method: 'POST',
+                    url: '/api/allowAd/:id',
+                    params: {id: '@Id'}
                 }
             });
 
@@ -140,12 +151,21 @@
                 /* stuff to do on init */
             };
 
+            $scope.allowAd = function(id) {
+
+                var params = {Id: id};
+                ImageService.allowAd(params, function(result) {
+                    $window.location.href = '/admin/dashboard/' + $scope.current_page + '/' + $scope.amt_per_page;
+                });
+
+            };
+
             $scope.removeContent = function(id) {
                 var params = {id: id};
                 ImageService.removeContent(params, function(result) {
 
                     if (result.ok === 1) {
-                        $window.location.href = '/admin/dashboard/' + page + '/' + perpage;
+                        $window.location.href = '/admin/dashboard/' + $scope.current_page + '/' + $scope.amt_per_page;
                     }
 
                 });
@@ -218,8 +238,9 @@
                     <a href="/{{id}}">
                         <img class="admin-image-preview" src="/api/media/{{id}}" alt="{{title}}" />
                     </a>
-                    <button type="button" class="image-button1">Flag as NSFW</button>
-                    <button type="button" ng-click="removeContent('{{id}}')" class="image-button2">Remove</button>
+                    <button type="button" class="image-button1" ng-click="flagAsNsfw('{{id}}')">Flag as NSFW</button>
+                    <button type="button" class="image-button2" ng-click="allowAd('{{id}}')">Toggle Allow Ad</button>
+                    <button type="button" ng-click="removeContent('{{id}}')" class="image-button3">Remove</button>
                 </div>
 
                 <div class="admin-image-info">
@@ -227,6 +248,7 @@
                     <p>ViewsWebsite: {{viewsWebsite}}</p>
                     <p>ViewsEmbeded: {{viewsEmbeded}}</p>
                     <p>Is Nsfw? {{isNsfw}}</p>
+                    <p>Ad Allowed: {{adAllowed}}</p>
                     <p>Date posted: {{date}}</p>
                     <p>Dimensions: {{width}}px x {{height}}px </p>
                     <p>Size: {{size}}</p>

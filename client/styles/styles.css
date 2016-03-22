@@ -119,6 +119,16 @@ fieldset {
   font-weight: 700;
   margin-top: -6px !important;
 }
+.image-page .content-container .image-content-right .ad-container {
+  text-align: center;
+  margin-top: .5rem;
+}
+.image-page .content-container .image-content-right .ad-container #adBox {
+  margin: auto;
+  margin-left: 3px;
+  width: 190px;
+  height: 62px;
+}
 .image-page .content-container .image-content-right .image-metadata {
   padding: 1rem;
   padding-top: 5px;
@@ -321,6 +331,12 @@ fieldset {
 @media (max-width: 720px) {
   .content-container .image-content-left img {
     width: 100%!important;
+  }
+}
+/* anything larger than 960px */
+@media (min-width: 961px) {
+  .ad-container {
+    margin: auto;
   }
 }
 @font-face {
